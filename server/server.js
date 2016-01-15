@@ -93,6 +93,8 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+app.get('/login', loginPost);
+
 app.get('/api/profiles', handler.findAll);
 app.post('/api/profiles', handler.createProfile);
 app.get('/api/profile/:githubName', handler.findOne);
@@ -101,3 +103,23 @@ app.post('/api/updateProfile', handler.updateProfile)
 app.listen(port, function() {
   console.log('Server started on port: ' + port);
 });
+
+// function loginPost(req, res, next){
+//   passport.authenticate('github', function(err, user, info){
+//     if(err){
+//       return next(err);
+//     }
+//     if(!user){
+//       req.session.messages = info.message;
+//       return res.redirect('/login');
+//     }
+//     req.logIn(user, function(err){
+//       if(err){
+//         req.session.messages = "Error logging in user";
+//         return next(err);
+//       }
+//       req.session.messages = "successful login";
+//       return res.redirect('/');
+//     });
+//   })(req, res, next);
+// }
