@@ -1,0 +1,26 @@
+{
+  "name": "hr-alumni",
+  "description": "Jaguar Legacy",
+  "main": "server/server.js",
+  "authors": [
+    "darwin <oleg.umarov@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/wunderg/hr-alumni",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.0",
+    "angular": "~1.4.8",
+    "bootstrap": "~3.3.6",
+    "bootstrap-social": "~4.12.0",
+    "font-awesome": "~4.5.0",
+    "angular-ui-router": "~0.2.15"
+  }
+}
