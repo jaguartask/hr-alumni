@@ -4,7 +4,8 @@
   "description": "Team Lambos Greenfield Project",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   "homepage": "https://github.com/HackerSocial/hr-alumni#readme",
   "dependencies": {
     "body-parser": "^1.14.2",
+    "bower": "^1.7.2",
     "express": "^4.13.3",
     "express-session": "^1.12.1",
     "materialize-css": "^0.97.5",

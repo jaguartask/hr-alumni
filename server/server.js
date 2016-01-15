@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var util = require('./config/utils.js');
 var handler = require('./config/request-handler.js');
-var bodyParser  = require('body-parser'); 
+var bodyParser  = require('body-parser');
 
 
   // Express 4 allows us to use multiple routers with their own configurations
@@ -71,20 +71,20 @@ app.get('/auth/github',
   }),
   function(req, res) {
     console.log('req', req);
-    console.log('res', res); 
+    console.log('res', res);
   });
 
 app.get('/auth/github/callback',
   passport.authenticate('github', {
     failureRedirect: '/login'
-  })
-  ,function(req, res) {
-    // console.log('req',req.user); 
+  }),
+  function(req, res) {
+    // console.log('req',req.user);
     var data= {
       body: req.user,
       fromGitHub: true
     }
-    console.log('data here: ', data); 
+    console.log('data here: ', data);
     handler.createProfile(data, res)
     // res.redirect('/');
   });
