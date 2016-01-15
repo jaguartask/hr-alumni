@@ -1,0 +1,21 @@
+<div class="container" ng-controller="messageBoardCtrl">
+    <div class="row">
+        <div class="s12 col">
+            <h3>Messages</h3>
+            <ul class="collection">
+                <li class="collection-item" ng-repeat="post in posts">
+                    <a ui-sref="post({id: {{post.id}}})">{{ post.title }}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="s12 col">
+            <p>Create New Post</p>
+            <form class="forms input-field ">
+                <input type="text" class="input-big width-50" id="query" ng-model="title" placeholder="Enter title...">
+                <textarea ng-model="body" placeholder="Enter message..."></textarea>
+                <button ng-click="createPost()">Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+

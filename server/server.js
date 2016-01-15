@@ -27,8 +27,8 @@ var bodyParser  = require('body-parser');
 var passport = require('passport');
 var GithubStrategy = require('passport-github2').Strategy;
 
-var GITHUB_CLIENT_ID = '399d03e217b75d4f4625';
-var GITHUB_CLIENT_SECRET = '8e4dcd1a7c66f1db0c438aa50aa3c4af8aa4d2d5';
+var GITHUB_CLIENT_ID = '22590cfd0af2cf2c13e8';
+var GITHUB_CLIENT_SECRET = 'b84e52eb142c9a613677e11c76e1d0dc27cdfaa3';
 
 passport.serializeUser(function(user, done) {
   done(null, user);
