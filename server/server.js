@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var util = require('./config/utils.js');
 var handler = require('./config/request-handler.js');
+var msgBoardHandler = require('./config/messageBoardHandler');
 var bodyParser  = require('body-parser');
 
 
@@ -96,7 +97,19 @@ app.get('/', function(req, res) {
 app.get('/api/profiles', handler.findAll);
 app.post('/api/profiles', handler.createProfile);
 app.get('/api/profile/:githubName', handler.findOne);
-app.post('/api/updateProfile', handler.updateProfile)
+app.post('/api/updateProfile', handler.updateProfile);
+
+//message board routes
+app.get('/api/posts', msgBoardHandler.getAllPosts);
+app.post('/api/posts', msgBoardHandler.savePost);
+app.param('post', msgBoardHandler.preloadPost); //preloading data, check msgBoardHandler
+app.get('/api/posts/:post', msgBoardHandler.getPost);
+app.put('/api/posts/:post/upvote', msgBoardHandler.upvotePost);
+app.post('/api/posts/:post/comments', msgBoardHandler.addComment);
+app.param('comment', msgBoardHandler.preloadComment); //preloading data, check msgBoardHandler
+app.put('/api/posts/:post/comments/:comment/upvote', msgBoardHandler.upvoteComment);
+app.get('/api/posts/:post', msgBoardHandler.getPostComments);
+
 
 app.listen(port, function() {
   console.log('Server started on port: ' + port);
