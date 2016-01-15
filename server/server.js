@@ -96,7 +96,7 @@ app.get('/', function(req, res) {
 
 //insert util.checkUser before the handler function to restrict
 //page to logged-in users only
-app.get('/api/profiles', util.checkUser, handler.findAll);
+app.get('/api/profiles', handler.findAll);
 app.post('/api/profiles', handler.createProfile);
 app.get('/api/profile/:githubName', handler.findOne);
 app.post('/api/updateProfile', handler.updateProfile);
