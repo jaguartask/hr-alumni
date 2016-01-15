@@ -28,6 +28,15 @@ angular.module('myApp', ['ui.router'])
       url: '/updateProfile/:githubName',
       templateUrl: 'app/views/updateProfile.html'
     })
+    .state('messageBoard', {
+      url: '/messages',
+      templateUrl: 'app/views/messages.html'
+    })
+    .state('post', {
+      url: '/post',
+      templateUrl: 'app/views/post.html',
+      params : { id: null, }
+    });
 }])
 
 .controller('homeCtrl', ['$scope','$state', function ($scope, $state) {
@@ -118,6 +127,28 @@ angular.module('myApp', ['ui.router'])
   }
 }])
 
+.controller('messageBoardCtrl', ['$scope', 'MessageBoard', function($scope, MessageBoard) {
+  $scope.posts = MessageBoard.getPosts();
+  $scope.createPost = function() {
+    if($scope.title) {
+      var post = {};
+      post.title = $scope.title;
+      post.body = $scope.body;
+      $scope.title = '';
+      $scope.body = '';
+      MessageBoard.addPost(post);
+    }
+  }
+}])
+
+.controller('postCtrl', ['$scope', '$stateParams', 'MessageBoard', function($scope, $stateParams, MessageBoard) {
+  $scope.post = MessageBoard.getPost($stateParams.id);
+  $scope.addComment = function() {
+    MessageBoard.addComment($stateParams.id, $scope.body);
+    $scope.body = '';
+  };
+}])
+
 .factory('HttpRequest', ['$http', '$q', function ($http, $q){
   var deferred= $q.defer();
   var submitProfile = function (isValid, data) {
@@ -150,8 +181,10 @@ angular.module('myApp', ['ui.router'])
       method: 'GET',
       url: '/api/profile/'+githubName
     }).success(function(result){
+      console.log('Get profile res: ', result);
       deferred.resolve(result);
     }).error(function (result){
+      console.log('Get profile err: ', result);
       deferred.reject(result);
     })
   }
@@ -180,3 +213,35 @@ angular.module('myApp', ['ui.router'])
   }
 
 })
+
+.factory('MessageBoard', function() {
+  var id = 3;
+  var posts = [ 
+    {id: 1, title: 'Post 1', comments: []},
+    {id: 2, title: 'Very important post 2', comments: []}
+  ];
+  var getPosts = function() {
+    return posts;
+  };
+  var addPost = function(post) {
+    post.id = id++;
+    post.comments = [];
+    posts.push(post);
+  }
+  var getPost = function(id) {
+    return posts.filter(function(post) {
+      return post.id === id;
+    })[0];
+  };
+  var addComment = function(id, comment) {
+    posts.filter(function(post) {
+      return post.id === id;
+    })[0].comments.push(comment);
+  };
+  return {
+    getPosts: getPosts,
+    addPost: addPost,
+    getPost: getPost,
+    addComment: addComment
+  };
+});

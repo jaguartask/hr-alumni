@@ -1,0 +1,20 @@
+<div class="container" ng-controller="postCtrl">
+  <div class="row">
+    <div class="s12 col">
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.body }}</p>
+      <ul class="collection">
+        <li class="collection-item" ng-repeat="comment in post.comments">
+            <a href="#/post/:{{post.id}}">{{ comment }}</a>
+        </li>
+      </ul>
+    </div>
+      <div class="s12 col">
+        <p>Add Comment</p>
+        <form class="forms input-field ">
+          <textarea ng-model="body" placeholder="Comment..."></textarea>
+          <button ng-click="addComment()">Add</button>
+        </form>
+      </div>
+  </div>
+</div>
