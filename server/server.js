@@ -93,8 +93,10 @@ app.get('/auth/github/callback',
 app.get('/', function(req, res) {
   res.render('index');
 });
-//app.get('api/profiles', loginPost);  //this doesn't invoke the function
-app.get('/api/profiles', util.checkUser, handler.findAll); //this has a CORS error if you try to call loginPost
+
+//insert util.checkUser before the handler function to restrict
+//page to logged-in users only
+app.get('/api/profiles', util.checkUser, handler.findAll);
 app.post('/api/profiles', handler.createProfile);
 app.get('/api/profile/:githubName', handler.findOne);
 app.post('/api/updateProfile', handler.updateProfile);
