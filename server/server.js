@@ -42,9 +42,12 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GithubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/github/callback"
+    callbackURL: "http://localhost:3000/auth/github/callback",
+    passReqToCallback: true
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(req, accessToken, refreshToken, profile, done) {
+    // accessToken will now be available on the res.user obj
+    profile.authInfo = accessToken;
     process.nextTick(function() {
       return done(null, profile);
     });
@@ -71,21 +74,22 @@ app.get('/auth/github',
     scope: ['user', 'user:email', 'read:org']
   }),
   function(req, res) {
-    console.log('req', req);
-    console.log('res', res);
+  //  console.log('req', req);
+  // console.log('res!!!!!!!!!', res);
   });
 
 app.get('/auth/github/callback',
   passport.authenticate('github', {
     failureRedirect: '/login'
   }),
-  function(req, res) {
-    // console.log('req',req.user);
+  function(req, res, accessToken) {
+    console.log("==========");
+    console.log("auth from profile::::", req.user.authInfo);
     var data= {
       body: req.user,
       fromGitHub: true
     }
-    console.log('data here: ', data);
+    //console.log('data here: ', data);
     handler.createProfile(data, res)
     // res.redirect('/');
   });
@@ -95,7 +99,8 @@ app.get('/', function(req, res) {
 });
 
 //insert util.checkUser before the handler function to restrict
-//page to logged-in users only
+//page to logged-in users only (as in the example below)
+//app.get('/api/profiles', util.checkUser, handler.findAll);
 app.get('/api/profiles', handler.findAll);
 app.post('/api/profiles', handler.createProfile);
 app.get('/api/profile/:githubName', handler.findOne);app.post('/api/updateProfile', handler.updateProfile)
