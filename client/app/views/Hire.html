@@ -1,14 +1,32 @@
 <div class="container" ng-controller="profilesCtrl">
   <div class="row">
     <div class="s12 col">
+
+
       <h3>Hire</h3>
       <br>
       <form class="forms forms-inline input-field ">
         <input type="text" class="input-big width-50" id="query" ng-model="query">
         <label for="query">Search Alumni</label>
       </form>
+
+      <br>
+      <div class="input-field col s6">
+        </br>
+        <input id="invest" type="checkbox" aria-describedby="basic-addon1" ng-model="search.invest" ng-true-value="{about:{invest:true}}" ng-false-value="">
+        <label class="active" for="invest">Invest filter</label>
+      </div>
+      <div class="input-field col s6">
+        </br>
+        <input id="hire" type="checkbox" aria-describedby="basic-addon1" ng-model="search.hire" ng-true-value="{about:{job:true}}" ng-false-value="">
+        <label class="active" for="hire">Hire filter</label>
+      </div>
+
+      <br>
+
       <ul class="collection">
-        <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="profile in profiles | filter: query | filter: {about:{job:true}}">
+
+        <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="profile in profiles | filter: query | filter: search.hire | filter: search.invest">
           <a href="" ng-click="modalDetails(profile)" class="modal-trigger title"><img ng-src="{{profile.contact.profilePic}}" alt="" class="circle"> {{profile.contact.name}}</a>
           <p>{{profile.contact.location}}</p>
         </li>
@@ -38,7 +56,7 @@
 
           <h5>{{profile.contact.name}}</h5>
           <label>Email</label>
-          <a ng-href="mailto:{{profile.contact.email}}">{{profile.contact.email}} </a>
+          <a ng-href="mailto:{{profile.contact.email}}"> {{profile.contact.email}} </a>
           <br/>
           <label>Languages</label> {{profile.experience.languages}}
           <br/>
@@ -47,17 +65,31 @@
           <hr>
           <label>Companies</label> {{profile.experience.companies}}
           <br/>
-          <label>Blog</label> {{profile.links.blog}}
-          <a ng-href="{{profile.links.blog}}">{{profile.links.blog}} </a>
+          <label>Blog</label>
+          <a ng-href="{{profile.links.blog}}" target="_blank">{{profile.links.blog}} </a>
           <br/>
           <label>LinkedIn</label>
-          <a ng-href="{{profile.links.linkedin}}">{{profile.links.linkedin}} </a>
+          <a ng-href="{{profile.links.linkedin}}" target="_blank">{{profile.links.linkedin}} </a>
+          <br/>
+          <label>Github</label>
+          <a ng-href="{{profile.links.github}}" target="_blank">{{profile.links.github}} </a>
           <br/>
           <hr>
           <label>Employment Status</label> {{profile.about.status}}
           <br/>
           <label>About Me</label> {{profile.about.summary}}
           <br/>
+          <br/>
+          <label>Project link</label>
+          <a ng-href="{{profile.projects.project1}}" target="_blank"> {{profile.projects.project1}} </a>
+          <br/>
+          <label>Project link</label>
+          <a ng-href="{{profile.projects.project2}}" target="_blank"> {{profile.projects.project2}} </a>
+          <br/>
+          <label>Project link</label>
+          <a ng-href="{{profile.projects.project3}}" target="_blank"> {{profile.projects.project3}} </a>
+          <br/>
+
         </div>
       </div>
     </div>
