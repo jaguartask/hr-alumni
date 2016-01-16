@@ -106,7 +106,7 @@ exports.createProfile = function(req, res) {
 
 exports.findAll = function(req, res) {
   User.find({}).exec(function(err, profiles) {
-    console.log('profiles in find all', profiles);
+    //console.log('profiles in find all', profiles);
     res.json(profiles);
   });
 };

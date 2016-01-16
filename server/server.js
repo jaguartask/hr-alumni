@@ -98,8 +98,11 @@ app.get('/', function(req, res) {
 //page to logged-in users only
 app.get('/api/profiles', handler.findAll);
 app.post('/api/profiles', handler.createProfile);
-app.get('/api/profile/:githubName', handler.findOne);
-app.post('/api/updateProfile', handler.updateProfile);
+app.get('/api/profile/:githubName', handler.findOne);app.post('/api/updateProfile', handler.updateProfile)
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+})
 
 //message board routes
 app.get('/api/posts', msgBoardHandler.getAllPosts);
