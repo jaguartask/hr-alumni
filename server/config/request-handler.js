@@ -2,9 +2,10 @@ var User = require('../users/userModel.js');
 
 
 exports.createProfile = function(req, res) {
-  console.log('request looks liek : ', req)
-  console.log('request.fromgithub : ', req.fromGitHub);
-
+  //console.log('request looks liek : ', req)
+  //console.log('request.fromgithub : ', req.fromGitHub);
+   console.log("!!======!!");
+   console.log("authInfo (in handler):", req.authInfo);
   if(req.fromGitHub) {
     var name = req.body['_json'].name;
     var profilePic= req.body['_json']['avatar_url'];
@@ -61,6 +62,7 @@ exports.createProfile = function(req, res) {
             location: location
           },
           about: {
+            job: job,
             summary: summary,
             status: status
           },
@@ -105,7 +107,7 @@ exports.createProfile = function(req, res) {
 
 exports.findAll = function(req, res) {
   User.find({}).exec(function(err, profiles) {
-    console.log('profiles in find all', profiles);
+    //console.log('profiles in find all', profiles);
     res.json(profiles);
   });
 };
@@ -124,6 +126,7 @@ exports.updateProfile= function (req, res) {
     var profilePic = req.body[0].contact.profilePic;
     var githubName = req.body[0].contact.githubName;
     var email = req.body[0].contact.email;
+    var job = req.body[0].about.job;
     var location = req.body[0].contact.location;
     var summary = req.body[0].about.summary;
     var status = req.body[0].about.status;
@@ -148,6 +151,7 @@ exports.updateProfile= function (req, res) {
           location: location
           },
           about: {
+            job:job,
             summary: summary,
             status: status
           },
