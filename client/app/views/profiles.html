@@ -29,11 +29,22 @@
                     <label>Location</label> {{profile.contact.location}} <br/>
                     <hr>
                     <label>Companies</label> {{profile.experience.companies}}<br/>
-                    <label>Blog</label> {{profile.links.blog}} <br/>
+                    <label>Blog</label>
+                    <a ng-href="{{profile.links.blog}}" target="_blank">{{profile.links.blog}} </a>
+                    <br/>
                     <label>LinkedIn</label><a ng-href="{{profile.links.linkedin}}"> {{profile.links.linkedin}} </a><br/>
                     <hr>
                     <label>Employment Status</label> {{profile.about.status}} <br/>
                     <label>About Me</label> {{profile.about.summary}} <br/>
+                    <label>Project link</label>
+                    <a ng-href="{{profile.projects.project1}}" target="_blank"> {{profile.projects.project1}} </a>
+                    <br/>
+                    <label>Project link</label>
+                    <a ng-href="{{profile.projects.project2}}" target="_blank"> {{profile.projects.project2}} </a>
+                    <br/>
+                    <label>Project link</label>
+                    <a ng-href="{{profile.projects.project3}}" target="_blank"> {{profile.projects.project3}} </a>
+                    <br/>
                 </div>
             </div>
         </div>
