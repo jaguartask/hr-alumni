@@ -75,6 +75,13 @@ exports.upvoteComment = function(req, res, next) {
   });
 };
 
+exports.downvoteComment = function(req, res, next) {
+  req.comment.downvote(function(err, post){
+    if (err) { return next(err); }
+    res.json(post);
+  });
+};
+
 exports.getPostComments = function(req, res, next) {
   req.post.populate('comments', function(err, post) {
     if (err) { return next(err); }
