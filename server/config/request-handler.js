@@ -63,6 +63,7 @@ exports.createProfile = function(req, res) {
           },
           about: {
             job: job,
+            invest: invest,
             summary: summary,
             status: status
           },
@@ -127,6 +128,7 @@ exports.updateProfile= function (req, res) {
     var githubName = req.body[0].contact.githubName;
     var email = req.body[0].contact.email;
     var job = req.body[0].about.job;
+    var invest = req.body[0].about.invest;
     var location = req.body[0].contact.location;
     var summary = req.body[0].about.summary;
     var status = req.body[0].about.status;
@@ -152,6 +154,7 @@ exports.updateProfile= function (req, res) {
           },
           about: {
             job:job,
+            invest:invest,
             summary: summary,
             status: status
           },

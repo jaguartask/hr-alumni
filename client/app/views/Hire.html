@@ -8,7 +8,7 @@
         <label for="query">Search Alumni</label>
       </form>
       <ul class="collection">
-        <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="profile in profiles | filter: query | filter: {about:{job:true}}">
+        <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="profile in profiles | filter:( query | filter: {about:{job:true}} || filter: {about:{invest:true}})">
           <a href="" ng-click="modalDetails(profile)" class="modal-trigger title"><img ng-src="{{profile.contact.profilePic}}" alt="" class="circle"> {{profile.contact.name}}</a>
           <p>{{profile.contact.location}}</p>
         </li>
@@ -38,7 +38,7 @@
 
           <h5>{{profile.contact.name}}</h5>
           <label>Email</label>
-          <a ng-href="mailto:{{profile.contact.email}}">{{profile.contact.email}} </a>
+          <a ng-href="mailto:{{profile.contact.email}}"> {{profile.contact.email}} </a>
           <br/>
           <label>Languages</label> {{profile.experience.languages}}
           <br/>
@@ -47,17 +47,31 @@
           <hr>
           <label>Companies</label> {{profile.experience.companies}}
           <br/>
-          <label>Blog</label> {{profile.links.blog}}
-          <a ng-href="{{profile.links.blog}}">{{profile.links.blog}} </a>
+          <label>Blog</label>
+          <a ng-href="{{profile.links.blog}}" target="_blank">{{profile.links.blog}} </a>
           <br/>
           <label>LinkedIn</label>
-          <a ng-href="{{profile.links.linkedin}}">{{profile.links.linkedin}} </a>
+          <a ng-href="{{profile.links.linkedin}}" target="_blank">{{profile.links.linkedin}} </a>
+          <br/>
+          <label>Github</label>
+          <a ng-href="{{profile.links.github}}" target="_blank">{{profile.links.github}} </a>
           <br/>
           <hr>
           <label>Employment Status</label> {{profile.about.status}}
           <br/>
           <label>About Me</label> {{profile.about.summary}}
           <br/>
+          <br/>
+          <label>Project link</label>
+          <a ng-href="{{profile.projects.project1}}" target="_blank"> {{profile.projects.project1}} </a>
+          <br/>
+          <label>Project link</label>
+          <a ng-href="{{profile.projects.project2}}" target="_blank"> {{profile.projects.project2}} </a>
+          <br/>
+          <label>Project link</label>
+          <a ng-href="{{profile.projects.project3}}" target="_blank"> {{profile.projects.project3}} </a>
+          <br/>
+
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ var UserSchema = new mongoose.Schema({
 
   about: {
     job: { type: Boolean, required: true },
+    invest: {type: Boolean, required: true},
     summary: {type: String},
     status: {type: String}
   },
