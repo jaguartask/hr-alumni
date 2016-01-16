@@ -4,8 +4,8 @@ var User = require('../users/userModel.js');
 exports.createProfile = function(req, res) {
   //console.log('request looks liek : ', req)
   //console.log('request.fromgithub : ', req.fromGitHub);
-  // console.log("!!======!!");
-  // console.log("req.user.authInfo (in handler):", req.body['json'].authInfo);
+   console.log("!!======!!");
+   console.log("authInfo (in handler):", req.authInfo);
   if(req.fromGitHub) {
     var name = req.body['_json'].name;
     var profilePic= req.body['_json']['avatar_url'];
