@@ -64,12 +64,22 @@ angular.module('myApp.MessageBoardService', [])
         return err;
       });
   };
+
+  var downvoteComment = function(post, comment) {
+    return $http.put('/api/posts/' + post._id + '/comments/'+ comment._id + '/downvote')
+      .success(function(data){
+      })
+      .error(function(err) {
+        return err;
+      });
+  };
   return {
     getPosts: getPosts,
     createPost: createPost,
     getPost: getPost,
     addComment: addComment,
     upvote: upvote,
-    upvoteComment: upvoteComment
+    upvoteComment: upvoteComment,
+    downvoteComment: downvoteComment
   };
 }]);

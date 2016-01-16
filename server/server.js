@@ -142,6 +142,7 @@ app.put('/api/posts/:post/upvote', msgBoardHandler.upvotePost);
 app.post('/api/posts/:post/comments', msgBoardHandler.addComment);
 app.param('comment', msgBoardHandler.preloadComment); //preloading data, check msgBoardHandler
 app.put('/api/posts/:post/comments/:comment/upvote', msgBoardHandler.upvoteComment);
+app.put('/api/posts/:post/comments/:comment/downvote', msgBoardHandler.downvoteComment);
 app.get('/api/posts/:post', msgBoardHandler.getPostComments);
 app.get('/api/profile/:githubName', handler.findOne);
 app.post('/api/updateProfile', handler.updateProfile)

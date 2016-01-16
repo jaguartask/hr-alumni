@@ -28,10 +28,17 @@ angular.module('myApp.messageBoard', [])
     $scope.body = '';
   }
 
-  $scope.upvote = function(index) {
-    messageBoardFactory.upvote($scope.posts[index])
+  $scope.upvote = function(post) {
+    messageBoardFactory.upvote(post)
       .success(function(data) {
         console.log('success');
       });
-  }
+  };
+
+  // $scope.downvote = function(post) {
+  //   messageBoardFactory.upvote(post)
+  //     .success(function(data) {
+  //       console.log('success');
+  //     });
+  // };
 }]);
