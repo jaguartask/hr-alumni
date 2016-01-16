@@ -56,10 +56,6 @@ angular.module('myApp', [
       url: '/post/{id}',
       templateUrl: 'app/messageBoard/post.html'
     })
-    .state('logout', {
-      url: '/logout',
-      templateUrl: 'app/views/login.html'
-    });
 }])
 
 .controller('homeCtrl', ['$scope','$state', function ($scope, $state) {
