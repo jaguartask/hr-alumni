@@ -24,13 +24,13 @@
                     <img style="margin: 10px" height="150px" width="auto" ng-src="{{profile.contact.profilePic}}" alt="" class="align-center circle">
 
                     <h5>{{profile.contact.name}}</h5>
-                    <label>Email</label> {{profile.contact.email}}<br/>
-                    <label>Languages</label> {{profile.experience.languages}} <br/>
+                    <label>Email</label><a ng-href="mailto:{{profile.contact.email}}"> {{profile.contact.email}} </a><br/>
+                    <label>Languages </label> {{profile.experience.languages}} <br/>
                     <label>Location</label> {{profile.contact.location}} <br/>
                     <hr>
                     <label>Companies</label> {{profile.experience.companies}}<br/>
                     <label>Blog</label> {{profile.links.blog}} <br/>
-                    <label>LinkedIn</label> {{profile.links.linkedin}} <br/>
+                    <label>LinkedIn</label><a ng-href="{{profile.links.linkedin}}"> {{profile.links.linkedin}} </a><br/>
                     <hr>
                     <label>Employment Status</label> {{profile.about.status}} <br/>
                     <label>About Me</label> {{profile.about.summary}} <br/>
@@ -40,4 +40,3 @@
         <div class="modal-footer"><a class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a></div>
     </div>
 </div>
-
