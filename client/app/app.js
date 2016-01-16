@@ -36,10 +36,6 @@ angular.module('myApp', [
       url: '/login',
       templateUrl: 'app/views/login.html'
     })
-    .state('logout', {
-      url: '/logout',
-      templateUrl: 'app/views/login.html'
-    })
     .state('profiles.profile', {
       url: '',
       templateUrl: 'app/views/profile.html'
