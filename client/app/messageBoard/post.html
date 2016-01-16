@@ -5,7 +5,7 @@
       <p>{{ post.body }}</p>
       <ul class="collection">
         <li class="collection-item" ng-repeat="comment in post.comments">
-            <a href="#/post/:{{post.id}}">{{ comment }}</a>
+            <i class="fa fa-thumbs-o-up" ng-click="upvoteComment(comment)"></i> {{ comment.upvotes }} | {{ comment.body }} by {{ comment.author }}
         </li>
       </ul>
     </div>
