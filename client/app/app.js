@@ -36,7 +36,11 @@ angular.module('myApp', ['ui.router'])
       url: '/post',
       templateUrl: 'app/views/post.html',
       params : { id: null, }
-    });
+    })
+    .state('logout', {
+      url: '/logout',
+      templateUrl: "app/views/login.html"
+    })
 }])
 
 .controller('homeCtrl', ['$scope','$state', function ($scope, $state) {
