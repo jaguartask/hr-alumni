@@ -94,6 +94,8 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+app.get('/login', loginPost);
+
 app.get('/api/profiles', handler.findAll);
 app.post('/api/profiles', handler.createProfile);
 app.get('/api/profile/:githubName', handler.findOne);
