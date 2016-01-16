@@ -8,6 +8,7 @@ var handler = require('./config/request-handler.js');
 var msgBoardHandler = require('./config/messageBoardHandler');
 var bodyParser  = require('body-parser');
 var tracker = require('./config/tracker.js');
+var request = require('request');
 
 
   // Express 4 allows us to use multiple routers with their own configurations
@@ -47,7 +48,6 @@ passport.use(new GithubStrategy({
     passReqToCallback: true
   },
   function(req, accessToken, refreshToken, profile, done) {
-    // accessToken will now be available on the res.user obj
     profile.authInfo = accessToken;
     process.nextTick(function() {
       return done(null, profile);
@@ -75,15 +75,16 @@ app.get('/auth/github',
     scope: ['user', 'user:email', 'read:org']
   }),
   function(req, res) {
-  //  console.log('req', req);
-  // console.log('res!!!!!!!!!', res);
+    console.log('req', req);
+    console.log('res', res);
   });
 
 app.get('/auth/github/callback',
   passport.authenticate('github', {
     failureRedirect: '/login'
   }),
-  function(req, res, accessToken) {
+
+  function(req, userResponse, accessToken) {
 
     var data= {
       body: req.user,
@@ -91,7 +92,34 @@ app.get('/auth/github/callback',
       authInfo: req.user.authInfo
     }
 
-    handler.createProfile(data, res)
+    var apiQuery = 'https://api.github.com/users/GMeyr/orgs?type=private?access_token=' + data.authInfo;
+
+    var options = {
+      url: apiQuery,
+      headers: {
+        'User-Agent': 'HR Alumni by JaguarTask'
+      }
+    };
+
+    request(options, function(err, githubResponse, body){
+      if(err){ console.log("org info request error:", err)};
+      if( !err ){
+        var parsed = JSON.parse(body);
+        var HRmember = false;
+        parsed.forEach(function(org){
+          if( org.login === 'remotebeta' || org.login === 'hackreactor'){
+            HRmember = true;
+          }
+        });
+
+        if( HRmember ){
+          handler.createProfile(data, userResponse);
+        } else {
+          userResponse.redirect('/#/membership');
+        }
+      }
+    });
+  
   });
 
 app.get('/', function(req, res) {
@@ -99,15 +127,11 @@ app.get('/', function(req, res) {
 });
 
 //insert util.checkUser before the handler function to restrict
-//page to logged-in users only (as in the example below)
-//app.get('/api/profiles', util.checkUser, handler.findAll);
+//page to logged-in users only
 app.get('/api/profiles', handler.findAll);
 app.post('/api/profiles', handler.createProfile);
-app.get('/api/profile/:githubName', handler.findOne);app.post('/api/updateProfile', handler.updateProfile)
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
-})
+app.get('/api/profile/:githubName', handler.findOne);
+app.post('/api/updateProfile', handler.updateProfile);
 
 //message board routes
 app.get('/api/posts', msgBoardHandler.getAllPosts);
