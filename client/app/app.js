@@ -2,7 +2,9 @@ angular.module('myApp', [
   'ui.router',
   'myApp.MessageBoardService',
   'myApp.messageBoard',
-  'myApp.post'
+  'myApp.post',
+  'myApp.tracker',
+  'myApp.TrackerFactory'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -12,6 +14,11 @@ angular.module('myApp', [
       url:'/home',
       templateUrl: 'app/views/home.html'
     })
+    // .state('tracker', {
+    //   url: '/tracker',
+    //   templateUrl: 'app/views/tracker.html'
+    //
+    // })
     .state('profiles', {
       url: '/profiles',
       templateUrl: 'app/views/profiles.html'
@@ -49,10 +56,6 @@ angular.module('myApp', [
       url: '/post/{id}',
       templateUrl: 'app/messageBoard/post.html'
     })
-    .state('logout', {
-      url: '/logout',
-      templateUrl: 'app/views/login.html'
-    });
 }])
 
 .controller('homeCtrl', ['$scope','$state', function ($scope, $state) {
@@ -84,6 +87,8 @@ angular.module('myApp', [
         console.log(profile);
         $scope.profile = profile;
         $('#modalDetails').openModal();
+
+
     };
 
 }])

@@ -7,6 +7,7 @@ var util = require('./config/utils.js');
 var handler = require('./config/request-handler.js');
 var msgBoardHandler = require('./config/messageBoardHandler');
 var bodyParser  = require('body-parser');
+var tracker = require('./config/tracker.js');
 
 
   // Express 4 allows us to use multiple routers with their own configurations
@@ -118,7 +119,10 @@ app.post('/api/posts/:post/comments', msgBoardHandler.addComment);
 app.param('comment', msgBoardHandler.preloadComment); //preloading data, check msgBoardHandler
 app.put('/api/posts/:post/comments/:comment/upvote', msgBoardHandler.upvoteComment);
 app.get('/api/posts/:post', msgBoardHandler.getPostComments);
-
+app.get('/api/profile/:githubName', handler.findOne);
+app.post('/api/updateProfile', handler.updateProfile)
+app.post('/api/tracker', tracker.saveJob)
+app.get('/api/tracker', tracker.getJobs)
 
 app.listen(port, function() {
   console.log('Server started on port: ' + port);
