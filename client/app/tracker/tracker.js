@@ -18,14 +18,5 @@ angular.module('myApp.tracker', [])
     .error(function(err) {
       console.log('err', err);
     })
-
-
-  // TrackerFactory.getJobs()
-  //   .success(function(data) {
-  //     $scope.jobs = data;
-  //   })
-  //   .error(function(err) {
-  //     console.log('unable to getJobs', err);
-  //   })
 })
 

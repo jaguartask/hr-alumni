@@ -79,11 +79,7 @@ angular.module('myApp', [
   HttpRequest.getProfiles()
     .then(function (res) {
       $scope.profiles= res.data;
-<<<<<<< HEAD
       $scope.setProfile= function (profile) {
-=======
-      $scope.setProfile = function (profile) {
->>>>>>> (feat) added a tracker with database
         console.log('set profile called');
         $scope.currentProfile= Profile.setProfile(profile);
         console.log('currentProfile', $scope.currentProfile);
