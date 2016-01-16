@@ -83,15 +83,14 @@ app.get('/auth/github/callback',
     failureRedirect: '/login'
   }),
   function(req, res, accessToken) {
-    console.log("==========");
-    console.log("auth from profile::::", req.user.authInfo);
+    //console.log("==========");
+    //console.log("auth from profile::::", req.user.authInfo);
     var data= {
       body: req.user,
-      fromGitHub: true
+      fromGitHub: true,
+      authInfo: req.user.authInfo
     }
-    //console.log('data here: ', data);
     handler.createProfile(data, res)
-    // res.redirect('/');
   });
 
 app.get('/', function(req, res) {

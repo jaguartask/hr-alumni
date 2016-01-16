@@ -48,6 +48,10 @@ angular.module('myApp', [
     .state('post', {
       url: '/post/{id}',
       templateUrl: 'app/messageBoard/post.html'
+    })
+    .state('logout', {
+      url: '/logout',
+      templateUrl: 'app/views/login.html'
     });
 }])
 
