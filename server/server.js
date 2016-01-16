@@ -104,6 +104,7 @@ app.get('/auth/github/callback',
     request(options, function(err, githubResponse, body){
       if(err){ console.log("org info request error:", err)};
       if( !err ){
+
         var parsed = JSON.parse(body);
         var HRmember = false;
         parsed.forEach(function(org){

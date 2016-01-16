@@ -49,8 +49,12 @@ exports.createProfile = function(req, res) {
   query.exec(function(err, user) {
       console.log('user: ', user);
       console.log('err', err);
+          console.log("more user info", name);
+          console.log("more user info", profilePic);
+          console.log("more user info", email);
       if (!user) {
         var newUser = new User({
+
           contact: {
             name: name,
             profilePic: profilePic,
