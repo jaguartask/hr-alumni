@@ -105,6 +105,7 @@ app.post('/api/posts', msgBoardHandler.savePost);
 app.param('post', msgBoardHandler.preloadPost); //preloading data, check msgBoardHandler
 app.get('/api/posts/:post', msgBoardHandler.getPost);
 app.put('/api/posts/:post/upvote', msgBoardHandler.upvotePost);
+app.put('/api/posts/:post/downvote', msgBoardHandler.downvotePost);
 app.post('/api/posts/:post/comments', msgBoardHandler.addComment);
 app.param('comment', msgBoardHandler.preloadComment); //preloading data, check msgBoardHandler
 app.put('/api/posts/:post/comments/:comment/upvote', msgBoardHandler.upvoteComment);

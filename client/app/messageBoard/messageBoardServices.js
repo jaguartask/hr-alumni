@@ -37,6 +37,16 @@ angular.module('myApp.MessageBoardService', [])
       });
   };
 
+  var downvote = function(post) {
+    return $http.put('/api/posts/' + post._id + '/downvote')
+      .success(function(data) {
+        post.upvotes -= 1;
+      })
+      .error(function(err) {
+        return err;
+      });
+  };
+
   var getPost = function(id) {
     return $http.get('/api/posts/' + id)
       .success(function(data) {
@@ -79,6 +89,7 @@ angular.module('myApp.MessageBoardService', [])
     getPost: getPost,
     addComment: addComment,
     upvote: upvote,
+    downvote: downvote,
     upvoteComment: upvoteComment,
     downvoteComment: downvoteComment
   };

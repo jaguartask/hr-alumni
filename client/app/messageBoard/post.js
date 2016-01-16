@@ -48,8 +48,15 @@ angular.module('myApp.post', [])
 
   $scope.upvote = function(post) {
     messageBoardFactory.upvote(post)
-      .success(function(data) {
-        console.log('success');
-      });
+      .error(function(err) {
+  	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
+  		});
+  };
+
+  $scope.downvote = function(post) {
+    messageBoardFactory.downvote(post)
+      .error(function(err) {
+  	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
+  		});
   };
 }]);
