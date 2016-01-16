@@ -1,6 +1,6 @@
 <div class='container-fluid' style="margin:70px" ng-controller='updateProfileCtrl'>
   <div class="row">
-    <form action="/#/profiles" class="col s12 input-group" ng-submit="submitProfile(!$inValid, data)"  name="createProfileForm">
+    <form action="/#/profiles" class="col s12 input-group" ng-submit="submitProfile(!$inValid, data)" name="createProfileForm">
       <div class="row">
         <div class="input-field col s6">
           <input id="name" type="text" class="validate" placeholder="Name (required)" aria-describedby="basic-addon1" ng-model="data[0].contact.name" required>
@@ -8,9 +8,9 @@
         </div>
 
 
-         <!--<div class="input-field col s6">-->
-          <!--<input id="profile_picture" type="text" class="validate" placeholder="Profile Picture" aria-describedby="basic-addon1" ng-model="data[0].contact.profilePic" required>-->
-          <!--<label class="active" for="profile_picture">Profile Picture Url</label>-->
+        <!--<div class="input-field col s6">-->
+        <!--<input id="profile_picture" type="text" class="validate" placeholder="Profile Picture" aria-describedby="basic-addon1" ng-model="data[0].contact.profilePic" required>-->
+        <!--<label class="active" for="profile_picture">Profile Picture Url</label>-->
         <!--</div>-->
 
         <div class="input-field col s6">
@@ -18,66 +18,73 @@
           <label class="active" for="email">Email</label>
         </div>
 
-         <div class="input-field col s6">
-          <input id="location" type="text" class="validate" placeholder="Location" aria-describedby="basic-addon1" ng-model="data[0].contact.location" >
+        <div class="input-field col s6">
+          <input id="location" type="text" class="validate" placeholder="Location" aria-describedby="basic-addon1" ng-model="data[0].contact.location">
           <label class="active" for="location">Location</label>
         </div>
 
         <div class="input-field col s6">
-          <input id="linkedIn" type="text" class="validate" placeholder="Linked In" aria-describedby="basic-addon1" ng-model="data[0].links.linkedin" >
+          <input id="linkedIn" type="text" class="validate" placeholder="Linked In" aria-describedby="basic-addon1" ng-model="data[0].links.linkedin">
           <label class="active" for="linkedIn">LinkedIn</label>
         </div>
 
         <div class="input-field col s6">
-          <input id="blog" type="text" class="validate" placeholder="Blog" aria-describedby="basic-addon1" ng-model="data[0].links.blog" >
+          <input id="blog" type="text" class="validate" placeholder="Blog" aria-describedby="basic-addon1" ng-model="data[0].links.blog">
           <label class="active" for="blog">Blog</label>
         </div>
 
         <div class="input-field col s6">
-          <input id="aboutMe" type="text" class="validate" placeholder="About Me" aria-describedby="basic-addon1" ng-model="data[0].about.summary" >
+          <input id="aboutMe" type="text" class="validate" placeholder="About Me" aria-describedby="basic-addon1" ng-model="data[0].about.summary">
           <label class="active" for="aboutMe">About Me</label>
         </div>
 
         <div class="input-field col s6">
-          <input id="status" type="text" class="validate" placeholder="Status" aria-describedby="basic-addon1" ng-model="data[0].about.status" >
+          <input id="status" type="text" class="validate" placeholder="Status" aria-describedby="basic-addon1" ng-model="data[0].about.status">
           <label class="active" for="status">Status</label>
         </div>
 
 
         <div class="input-field col s6">
-          <input id="companies" type="text" class="validate" placeholder="Companies" aria-describedby="basic-addon1" ng-model="data[0].experience.companies" >
+          <input id="companies" type="text" class="validate" placeholder="Companies" aria-describedby="basic-addon1" ng-model="data[0].experience.companies">
           <label class="active" for="companies">Companies</label>
         </div>
 
 
         <div class="input-field col s6">
-          <input id="languages" type="text" class="validate" placeholder="Languages" aria-describedby="basic-addon1" ng-model="data[0].experience.languages" >
+          <input id="languages" type="text" class="validate" placeholder="Languages" aria-describedby="basic-addon1" ng-model="data[0].experience.languages">
           <label class="active" for="languages">Languages</label>
         </div>
 
 
         <div class="input-field col s6">
-          <input id="GreenfieldProjectUrl" type="text" class="validate" placeholder="Greenfield Project Url" aria-describedby="basic-addon1" ng-model="data[0].project1" >
+          <input id="GreenfieldProjectUrl" type="text" class="validate" placeholder="Greenfield Project Url" aria-describedby="basic-addon1" ng-model="data[0].project1">
           <label class="active" for="GreenfieldProjectUrl">GreenfieldProjectUrl</label>
         </div>
 
 
         <div class="input-field col s6">
-          <input id="LegacyProjectUrl" type="text" class="validate" placeholder="Legacy Project Url" aria-describedby="basic-addon1" ng-model="data[0].project2" >
+          <input id="LegacyProjectUrl" type="text" class="validate" placeholder="Legacy Project Url" aria-describedby="basic-addon1" ng-model="data[0].project2">
           <label class="active" for="LegacyProjectUrl">Legacy Project Url</label>
         </div>
 
         <div class="input-field col s6">
-          <input id="ThesisProjectUrl" type="text" class="validate" placeholder="Legacy Project Url" aria-describedby="basic-addon1" ng-model="data[0].project3" >
+          <input id="ThesisProjectUrl" type="text" class="validate" placeholder="Legacy Project Url" aria-describedby="basic-addon1" ng-model="data[0].project3">
           <label class="active" for="ThesisProjectUrl">Thesis Project Url</label>
+        </div>
+
+        <div class="input-field col s6">
+          <p>
+            Check to be added to hire list
+          </p>
+          </br>
+          <input id="job" type="checkbox" class="validate" placeholder="Job" aria-describedby="basic-addon1" ng-model="data[0].about.job">
+          <label class="active" for="job">Seeking new and exciting opportunities!</label>
         </div>
 
       </div>
       <!-- <button type='submit' ng-click="submitProfile()"> Update Profile</button> -->
-       <!-- <button type="submit" ng-click="submitProfile(!$inValid, data)" ng-disabled="createProfileForm.$inValid">Update Profile</button> -->
-        <button class="btn waves-effect waves-light" type="submit" ng-disabled="createProfileForm.$inValid">Update Profile</button>
+      <!-- <button type="submit" ng-click="submitProfile(!$inValid, data)" ng-disabled="createProfileForm.$inValid">Update Profile</button> -->
+      <button class="btn waves-effect waves-light" type="submit" ng-disabled="createProfileForm.$inValid">Update Profile</button>
     </form>
   </div>
 </div>
-
-
