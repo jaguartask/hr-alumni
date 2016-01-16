@@ -2,10 +2,7 @@ var User = require('../users/userModel.js');
 
 
 exports.createProfile = function(req, res) {
-  //console.log('request looks liek : ', req)
-  //console.log('request.fromgithub : ', req.fromGitHub);
-   console.log("!!======!!");
-   console.log("authInfo (in handler):", req.authInfo);
+
   if(req.fromGitHub) {
     var name = req.body['_json'].name;
     var profilePic= req.body['_json']['avatar_url'];
@@ -52,8 +49,12 @@ exports.createProfile = function(req, res) {
   query.exec(function(err, user) {
       console.log('user: ', user);
       console.log('err', err);
+          console.log("more user info", name);
+          console.log("more user info", profilePic);
+          console.log("more user info", email);
       if (!user) {
         var newUser = new User({
+
           contact: {
             name: name,
             profilePic: profilePic,
@@ -62,7 +63,6 @@ exports.createProfile = function(req, res) {
             location: location
           },
           about: {
-            job: job,
             invest: invest,
             summary: summary,
             status: status

@@ -26,7 +26,8 @@
     "mongoose": "^4.0.0",
     "mongoose-type-url": "^1.0.1",
     "passport": "^0.3.2",
-    "passport-github2": "^0.1.9"
+    "passport-github2": "^0.1.9",
+    "request": "^2.67.0"
   },
   "engines": {
     "node": "5.2.0",

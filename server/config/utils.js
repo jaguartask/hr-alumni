@@ -1,4 +1,3 @@
-
 exports.checkUser = function(req, res, next) {
   console.log("checkUser is called");
   if  (!req.isAuthenticated()) { 
