@@ -1,11 +1,13 @@
 <div class="container" ng-controller="postCtrl">
   <div class="row">
     <div class="s12 col">
-      <h3>{{ post.title }}</h3>
+      <h3><i class="fa fa-thumbs-o-up" ng-click="upvote(post)"></i> {{ post.upvotes }} 
+      <i class="fa fa-thumbs-o-down" ng-click="downvote(post)"></i> | {{ post.title }} by {{ post.author }}</h3>
       <p>{{ post.body }}</p>
       <ul class="collection">
         <li class="collection-item" ng-repeat="comment in post.comments">
-            <i class="fa fa-thumbs-o-up" ng-click="upvoteComment(comment)"></i> {{ comment.upvotes }} | {{ comment.body }} by {{ comment.author }}
+            <i class="fa fa-thumbs-o-up" ng-click="upvoteComment(comment)"></i> {{ comment.upvotes }} 
+            <i class="fa fa-thumbs-o-down" ng-click="downvoteComment(comment)"></i> | {{ comment.body }} by {{ comment.author }}
         </li>
       </ul>
     </div>
