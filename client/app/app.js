@@ -15,11 +15,6 @@ angular.module('myApp', [
       url:'/home',
       templateUrl: 'app/views/home.html'
     })
-    // .state('tracker', {
-    //   url: '/tracker',
-    //   templateUrl: 'app/views/tracker.html'
-    //
-    // })
     .state('profiles', {
       url: '/profiles',
       templateUrl: 'app/views/profiles.html'
