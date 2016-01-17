@@ -1,18 +1,6 @@
 <div class="container">
 <div ng-controller="TrackerCtrl as tracker">
-<<<<<<< HEAD
-  <div class="row">
-        <div class="input-field col offset-s3 s6">
-          <input ng-model="searchText" id="jobfilter" type="text" class="validate">
-          <label for="jobfilter">Search</label>
-        </div>
-      </div>
- <ul class="collapsible" data-collapsible="accordion">
-   <li ng-repeat="job in jobs | filter:searchText">
-     <div class="collapsible-header"><i class="material-icons">filter_drama</i>{{job.name}}</div>
-     <div class="collapsible-body">
-       <table class="centered highlight responsive-table">
-=======
+
 <a class="waves-effect waves-light btn left modal-trigger" style="top: 25px; left: 25px" ng-click="addJob()" ><i class="material-icons left">library_add</i>Add Job</a>
 <div class="row">
   <div class="input-field col s3 right">
@@ -32,7 +20,6 @@
     </div>
     <div class="collapsible-body">
       <table class="centered highlight responsive-table">
->>>>>>> delete works, update in progress
         <thead>
           <tr>
             <th data-field="date" remove(job._id)>Date</th>
