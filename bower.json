@@ -21,6 +21,11 @@
     "bootstrap": "~3.3.6",
     "bootstrap-social": "~4.12.0",
     "font-awesome": "~4.5.0",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "angular-moment": "~0.10.3",
+    "moment": "~2.11.1"
+  },
+  "resolutions": {
+    "moment": "~2.11.1"
   }
 }

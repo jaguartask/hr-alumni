@@ -7,7 +7,6 @@ angular.module('myApp.post', [])
   messageBoardFactory
   	.getPost($stateParams.id)
   	.success(function(data) {
-  		console.log('post data: ', data);
   		$scope.post = data;
   	})
   	.error(function(err) {
@@ -34,5 +33,34 @@ angular.module('myApp.post', [])
   		.error(function(err) {
   	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
   		});
+  };
+
+  $scope.downvoteComment = function(comment) {
+  	messageBoardFactory
+  		.downvoteComment($scope.post, comment)
+  		.success(function(data) {
+  			comment.upvotes -= 1;
+  		})
+  		.error(function(err) {
+  	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
+  		});
+  };
+
+  $scope.upvote = function(post) {
+    messageBoardFactory.upvote(post)
+      .error(function(err) {
+  	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
+  		});
+  };
+
+  $scope.downvote = function(post) {
+    messageBoardFactory.downvote(post)
+      .error(function(err) {
+  	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
+  		});
+  };
+
+  $scope.showCreateComment = function() {
+    $('#createComment').openModal();
   };
 }]);

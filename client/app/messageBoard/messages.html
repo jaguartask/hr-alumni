@@ -1,22 +1,49 @@
 <div class="container" ng-controller="messageBoardCtrl">
-    <div class="row">
-        <div class="s12 col">
-            <h3>Messages</h3>
-            <ul class="collection">
-                <li class="collection-item" ng-repeat="post in posts">
-                    <i class="fa fa-thumbs-o-up" ng-click="upvote($index)"></i> {{ post.upvotes }}
-                    <a href="?#/post/{{post._id}}">{{ post.title }}</a> by {{post.author}}
-                </li>
-            </ul>
-        </div>
-        <div class="s12 col">
-            <p>Create New Post</p>
-            <form class="forms input-field ">
-                <input type="text" class="input-big width-50" id="query" ng-model="title" placeholder="Enter title...">
-                <textarea ng-model="body" placeholder="Enter message..."></textarea>
-                <button ng-click="createPost()">Create</button>
-            </form>
-        </div>
-    </div>
+	<div class="row">
+		<div class="s12 col">
+			<h3>Message Board</h3>
+			<div class="card hoverable" ng-repeat="post in posts">
+				<div class="card-content">
+					<div class="row card-row">
+						<div class="col s1 l1">
+							<div class="valign-wrapper card-left">
+								<div class="valign">
+						  		<i class="material-icons" ng-click="upvote(post)">thumb_up</i>
+						  		<p style="padding-left: 7px;">{{ post.upvotes }}</p>
+						  		<i class="material-icons" ng-click="downvote(post)">thumb_down</i>
+						  	</div>
+							</div>
+						</div>
+						<div class="col s11 l11">
+							<span class="card-title"><a href="#/post/{{ post._id }}">{{ post.title }}</a></span>
+							<div class="divider"></div>
+							<p>created <time am-time-ago="post.createdAt"></time> by {{post.author}}
+							<span class="right"><span class="comment-number">{{ post.comments.length }}</span> <i class="tiny material-icons">textsms</i></span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+			  <a class="btn-floating btn-large green" ng-click="showCreatePost()">
+			    <i class="large material-icons">mode_edit</i>
+			  </a>
+			</div>
+		</div>
+		<div id="createPost" class="modal">
+			<div class="modal-content">
+			  <h4>Create A New Post</h4>
+			  <form>
+			  	<div class="input-field">
+				  	<input type="text" class="input-big width-50" id="title" ng-model="title" >
+				  	<label for="input">Title</label>
+				  </div>
+			  	<div class="input-field">
+				  	<textarea ng-model="body" class="materialize-textarea" id="body"></textarea>
+				  	<label for="body">Message</label>
+				  </div>
+			  	<button class="waves-effect waves-light btn" ng-click="createPost()">Create</button>
+			  </form>
+			</div>
+		</div>
+	</div>
 </div>
-

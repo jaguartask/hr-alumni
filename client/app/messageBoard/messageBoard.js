@@ -28,10 +28,21 @@ angular.module('myApp.messageBoard', [])
     $scope.body = '';
   }
 
-  $scope.upvote = function(index) {
-    messageBoardFactory.upvote($scope.posts[index])
-      .success(function(data) {
-        console.log('success');
+  $scope.upvote = function(post) {
+    messageBoardFactory.upvote(post)
+      .error(function(err) {
+          $scope.error = 'Ooopsss...something went wrong. Please try again later.';
       });
-  }
+  };
+
+  $scope.downvote = function(post) {
+    messageBoardFactory.downvote(post)
+      .error(function(err) {
+          $scope.error = 'Ooopsss...something went wrong. Please try again later.';
+      });
+  };
+
+  $scope.showCreatePost = function() {
+    $('#createPost').openModal();
+  };
 }]);
