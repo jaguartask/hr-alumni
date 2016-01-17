@@ -42,10 +42,10 @@ exports.removeJob = function(req, res, next) {
 exports.updateJob = function(req, res, next) {
   var id = req.body._id;
   Job
-    .findById(id)
+    .findByIdAndUpdate(id, req.body)
     .exec()
     .then(function(result) {
-     console.log(result);
+     res.json(result);
     })
     .then(null, function(err) {
       console.log(err);

@@ -1,7 +1,7 @@
 {
   "name": "hr-alumni",
   "version": "1.0.0",
-  "description": "Team Lambos Greenfield Project",
+  "description": "Team Jaguar Greenfield Project",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",

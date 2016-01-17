@@ -8,7 +8,7 @@ var JobSchema = new mongoose.Schema({
   phone: Boolean,
   position: String,
   salary: String,
-  site: Boolean,
+  site: String,
   respond: String,
   show: Boolean
 });

@@ -38,16 +38,18 @@ angular.module('myApp.tracker', ['ui.materialize'])
     }
 
   $scope.save = function(user) {
+    console.log(user);
     user.offer = 'not yet';
     user.date = day + ' ' + monthNames[monthIndex];
     user.phone = false;
-    user.site = false;
+    user.site = ' ';
     user.respond = ' ';
     user.show = true;
     TrackerFactory
       .saveJob(user)
       .success(function(data) {
         $state.reload();
+        $scope.user = {};
       })
       .error(function(err) {
         console.log(err);
@@ -55,19 +57,21 @@ angular.module('myApp.tracker', ['ui.materialize'])
   };
 
   $scope.update = function(job) {
-    console.log(job);
     $scope.user = job;
     $scope.updateJob();
-    // TrackerFactory
-    //   .updateJob(job)
-    //   .success(function(data) {
-    //     console.log(data);
-    //   })
-    //   .error(function(err) {
-    //     console.log(err);
-    //   })
   }
 
+ $scope.triggerJobUpdate = function(job) {
+   console.log('triiger update');
+    TrackerFactory
+      .updateJob(job)
+      .success(function(data) {
+        console.log(data);
+      })
+      .error(function(err) {
+        console.log(err);
+      })
+ }
 
   $scope.remove = function(job) {
     console.log(job);
