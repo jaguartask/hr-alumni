@@ -19,4 +19,3 @@ angular.module('myApp.tracker', [])
       console.log('err', err);
     })
 })
-
