@@ -8,7 +8,9 @@ var JobSchema = new mongoose.Schema({
   phone: Boolean,
   position: String,
   salary: String,
-  site: String
+  site: Boolean,
+  respond: String,
+  show: Boolean
 });
 
 module.exports = mongoose.model('Job', JobSchema);

@@ -12,7 +12,40 @@ angular.module('myApp.TrackerFactory', [])
       })
   }
 
+  function saveJob(user) {
+    return $http.post('/api/tracker', user)
+      .success(function(data) {
+        return data;
+      })
+      .error(function(err) {
+        return err;
+      })
+  }
+
+  function removeJob(job) {
+    return $http.post('/api/tracker/remove', job)
+      .success(function(data) {
+        return data;
+      })
+      .error(function(err) {
+        return err;
+      })
+  }
+
+  function updateJob(job) {
+    return $http.post('/api/tracker/update', job)
+      .success(function(data) {
+        return data;
+      })
+      .error(function(err) {
+        return err;
+      })
+  }
+
   return {
-    getJobs: getJobs
+    saveJob: saveJob,
+    getJobs: getJobs,
+    removeJob: removeJob,
+    updateJob: updateJob
   }
 })
