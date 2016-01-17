@@ -9,6 +9,7 @@ var msgBoardHandler = require('./config/messageBoardHandler');
 var bodyParser  = require('body-parser');
 var tracker = require('./config/tracker.js');
 var request = require('request');
+var env = process.env.NODE_ENV || 'dev';
 
 
   // Express 4 allows us to use multiple routers with their own configurations
@@ -55,9 +56,11 @@ passport.use(new GithubStrategy({
   }
 ));
 
-
-// mongoose.connect(process.env.MONGOLAB_URI);
-mongoose.connect("mongodb://localhost/hralumnimark2");
+if (env === 'dev') {
+  mongoose.connect("mongodb://localhost/hralumnimark2");
+} else {
+  mongoose.connect(MONGOLAB_URI);
+}
 
 app.use(express.static(__dirname + '/../client'));
 
