@@ -59,7 +59,7 @@ passport.use(new GithubStrategy({
 if (env === 'dev') {
   mongoose.connect("mongodb://localhost/hralumnimark2");
 } else {
-  mongoose.connect(MONGOLAB_URI);
+  mongoose.connect('mongodb://alumni:alumni@ds047095.mongolab.com:47095/heroku_2v9zdb19');
 }
 
 app.use(express.static(__dirname + '/../client'));
