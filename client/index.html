@@ -5,9 +5,7 @@
     <script src="lib/angular/angular.min.js"></script>
     <script src= "lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 
-    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="lib/bootstrap-social/bootstrap-social.css">
+    
 
 <!-- CSS -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -28,6 +26,7 @@
       <a id="logo-container" href="#" class="brand-logo" ui-sref="home">HR Alumni</a>
       <ul class="right hide-on-med-and-down">
         <!-- <li><a ui-sref="createProfile">CreateProfile</a></li> -->
+        <li><a ui-sref="messageBoard">Message Board</a></li>
         <li><a ui-sref="Hire">Hire</a></li>
         <li><a ui-sref="profiles">Profiles</a></li>
         <!-- <li><a ui-sref="profile">Individual Profile</a></li> -->
@@ -46,11 +45,11 @@
      </div>
     </nav>
 
-    <div class="container">
-      <div ui-view></div>
-    </div>
+    <div ui-view></div>
 
     <script src="js/materialize.min.js"></script>
+    <script src="lib/moment/min/moment.min.js"></script>
+    <script src="lib/angular-moment/angular-moment.min.js"></script>
     <script src="js/init.js"></script>
 
   </body>

@@ -1,22 +1,64 @@
 <div class="container" ng-controller="postCtrl">
   <div class="row">
     <div class="s12 col">
-      <h3><i class="fa fa-thumbs-o-up" ng-click="upvote(post)"></i> {{ post.upvotes }} 
-      <i class="fa fa-thumbs-o-down" ng-click="downvote(post)"></i> | {{ post.title }} by {{ post.author }}</h3>
-      <p>{{ post.body }}</p>
-      <ul class="collection">
-        <li class="collection-item" ng-repeat="comment in post.comments">
-            <i class="fa fa-thumbs-o-up" ng-click="upvoteComment(comment)"></i> {{ comment.upvotes }} 
-            <i class="fa fa-thumbs-o-down" ng-click="downvoteComment(comment)"></i> | {{ comment.body }} by {{ comment.author }}
-        </li>
-      </ul>
-    </div>
-      <div class="s12 col">
-        <p>Add Comment</p>
-        <form class="forms input-field ">
-          <textarea ng-model="body" placeholder="Comment..."></textarea>
-          <button ng-click="addComment()">Add</button>
-        </form>
+      <h3>{{ post.title }}</h3>
+      <div class="card hoverable">
+        <div class="card-content">
+          <div class="row card-row">
+            <div class="col s1 l1">
+              <div class="valign-wrapper comment-left">
+                <div class="valign">
+                  <i class="material-icons" ng-click="upvote(post)">thumb_up</i>
+                  <p style="padding-left: 7px;">{{ post.upvotes }}</p>
+                  <i class="material-icons" ng-click="downvote(post)">thumb_down</i>
+                </div>
+              </div>
+            </div>
+            <div class="col s11 l11">
+              <div class="card-content">
+                <p>{{ post.body }}</p>
+              </div>
+              <div class="divider"></div>
+              <p>created <time am-time-ago="post.createdAt"></time> by {{post.author}}
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="card-panel hoverable">
+        <div class="row comment-row" ng-repeat="comment in post.comments">
+          <div class="col offset-s1 offset-l1 s1 l1">
+            <div class="valign-wrapper card-left">
+              <div class="valign">
+                <i class="material-icons" ng-click="upvote(post)">thumb_up</i>
+                <p style="padding-left: 7px;">{{ comment.upvotes }}</p>
+                <i class="material-icons" ng-click="downvote(post)">thumb_down</i>
+              </div>
+            </div>
+          </div>
+          <div class="col s10 l10">
+            <p><div class="chip pink white-text">{{comment.author}}</div> <time am-time-ago="comment.createdAt"></time></p>
+            <p>{{ comment.body }}</p>
+            <div class="divider"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large green" ng-click="showCreateComment()">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+  </div>
+  <div id="createComment" class="modal">
+    <div class="modal-content">
+      <h4>Comment on "{{ post.title }}" post</h4>
+      <form>
+        <div class="input-field">
+          <textarea ng-model="body" class="materialize-textarea" id="body"></textarea>
+          <label for="body">Comment</label>
+        </div>
+        <button class="waves-effect waves-light btn" ng-click="addComment()">Reply</button>
+      </form>
+    </div>
   </div>
 </div>

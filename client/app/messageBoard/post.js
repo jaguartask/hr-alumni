@@ -59,4 +59,8 @@ angular.module('myApp.post', [])
   	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
   		});
   };
+
+  $scope.showCreateComment = function() {
+    $('#createComment').openModal();
+  };
 }]);
