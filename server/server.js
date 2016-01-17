@@ -42,7 +42,10 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-passport.use(new GithubStrategy({
+// variables that depened on the environment
+if (env === 'dev') {
+
+  passport.use(new GithubStrategy({
     clientID: GITHUB_CLIENT_ID,
     clientSecret: GITHUB_CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/github/callback",
@@ -56,10 +59,25 @@ passport.use(new GithubStrategy({
   }
 ));
 
-if (env === 'dev') {
-  mongoose.connect("mongodb://localhost/hralumnimark2");
+mongoose.connect("mongodb://localhost/hralumnimark2");
+
 } else {
-  mongoose.connect('mongodb://alumni:alumni@ds047095.mongolab.com:47095/heroku_2v9zdb19');
+
+  passport.use(new GithubStrategy({
+    clientID: GITHUB_CLIENT_ID,
+    clientSecret: GITHUB_CLIENT_SECRET,
+    callbackURL: "https://hr-alumni.herokuapp.com/auth/github/callback",
+    passReqToCallback: true
+  },
+  function(req, accessToken, refreshToken, profile, done) {
+    profile.authInfo = accessToken;
+    process.nextTick(function() {
+      return done(null, profile);
+    });
+  }
+));
+
+mongoose.connect('mongodb://alumni:alumni@ds047095.mongolab.com:47095/heroku_2v9zdb19');
 }
 
 app.use(express.static(__dirname + '/../client'));
