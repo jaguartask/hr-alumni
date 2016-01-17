@@ -84,3 +84,37 @@ footer
   padding-top: 0px;
   text-align: center;
 }
+
+.comment-number {
+  font-size: 1rem;
+}
+
+.card-row {
+  margin-bottom: 0;
+}
+.title-row {
+  margin: 0;
+}
+
+.card-left > .valign {
+  max-height: 80px;
+}
+
+.card-left > .valign > p {
+  margin: 0;
+  line-height: 1rem;
+}
+
+.tittle-row {
+  margin-top: 80px;
+}
+
+@media screen and (min-width: 964px) {
+  .card-row > .l1 {
+    width: 4% !important;
+  }
+
+  .card-row > .l11 {
+    width: 95% !important;
+  }
+}

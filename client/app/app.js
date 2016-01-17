@@ -4,7 +4,8 @@ angular.module('myApp', [
   'myApp.messageBoard',
   'myApp.post',
   'myApp.tracker',
-  'myApp.TrackerFactory'
+  'myApp.TrackerFactory',
+  'angularMoment'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -36,10 +37,10 @@ angular.module('myApp', [
       url: '/login',
       templateUrl: 'app/views/login.html'
     })
-    .state('profiles.profile', {
-      url: '',
-      templateUrl: 'app/views/profile.html'
-    })
+    // .state('profiles.profile', {
+    //   url: '/profiles',
+    //   templateUrl: 'app/views/profile.html'
+    // })
     .state('updateProfile', {
       url: '/updateProfile/:githubName',
       templateUrl: 'app/views/updateProfile.html'
@@ -64,7 +65,7 @@ angular.module('myApp', [
 
 .controller('homeCtrl', ['$scope','$state', function ($scope, $state) {
 
-  $state.transitionTo('profiles.profile');
+  $state.transitionTo('profiles');
 
 }])
 

@@ -5,9 +5,13 @@
     <script src="lib/angular/angular.min.js"></script>
     <script src= "lib/angular-ui-router/release/angular-ui-router.min.js"></script>
 
+<<<<<<< e08a3a4c61111ad9d5c056fb7a4a6e43dccb43f8
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="lib/bootstrap-social/bootstrap-social.css"> -->
+=======
+    
+>>>>>>> (feat) upgrade the message board and single message design
 
 <!-- CSS -->
     <meta name="viewport" content="width=device-width, initial-scale=10"/>
@@ -32,6 +36,7 @@
       <ul class="right hide-on-med-and-down">
         <!-- <li><a ui-sref="createProfile">CreateProfile</a></li> -->
         <li><a class="btn btn-social btn-github text-center" href='/auth/github'>Update</a></li>
+        <li><a ui-sref="messageBoard">Message Board</a></li>
         <li><a ui-sref="Hire">Hire</a></li>
         <li><a ui-sref="profiles">Profiles</a></li>
         <li><a ui-sref="tracker">Tracker</a></li>
@@ -53,11 +58,11 @@
      </div>
     </nav>
 
-    <div class="container">
-      <div ui-view></div>
-    </div>
+    <div ui-view></div>
 
-
-
+    <script src="js/materialize.min.js"></script>
+    <script src="lib/moment/min/moment.min.js"></script>
+    <script src="lib/angular-moment/angular-moment.min.js"></script>
+    <script src="js/init.js"></script>
   </body>
 </html>

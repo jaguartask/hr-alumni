@@ -41,4 +41,8 @@ angular.module('myApp.messageBoard', [])
           $scope.error = 'Ooopsss...something went wrong. Please try again later.';
       });
   };
+
+  $scope.showCreatePost = function() {
+    $('#createPost').openModal();
+  };
 }]);
