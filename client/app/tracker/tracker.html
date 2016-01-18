@@ -174,6 +174,7 @@ function resizeTextAreasOnFocus() {
         }
 
         $('body').on('focus', '.materialize-textarea', function () {
+          console.log(this)
             resizeTextArea($(this));
         })
     }
