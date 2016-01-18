@@ -138,9 +138,9 @@ exports.updateProfile= function (req, res) {
     var website = req.body[0].links.website;
     var linkedin = req.body[0].links.linkedin;
     var github = req.body[0].links.github;
-    var project1  = req.body[0].project1;
-    var project2  = req.body[0].project2;
-    var project3  = req.body[0].project3;
+    var project1  = req.body[0].projects.project1;
+    var project2  = req.body[0].projects.project2;
+    var project3  = req.body[0].projects.project3;
 
 
   User.findOneAndUpdate( {'contact.githubName': githubName },
