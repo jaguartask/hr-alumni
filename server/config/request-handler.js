@@ -3,6 +3,15 @@ var User = require('../users/userModel.js');
 
 exports.createProfile = function(req, res) {
 
+<<<<<<< HEAD
+=======
+  //console.log('request looks liek : ', req)
+  //console.log('request.fromgithub : ', req.fromGitHub);
+   console.log("authInfo (in handler):", req.authInfo);
+
+   console.log("organizations url", req.body['_json']['organizations_url']);
+
+>>>>>>> created api call for public orgs
   if(req.fromGitHub) {
     var name = req.body['_json'].name;
     var profilePic= req.body['_json']['avatar_url'];
@@ -63,7 +72,10 @@ exports.createProfile = function(req, res) {
             location: location
           },
           about: {
+<<<<<<< HEAD
             invest: invest,
+=======
+>>>>>>> created api call for public orgs
             summary: summary,
             status: status
           },

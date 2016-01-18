@@ -12,6 +12,7 @@ var request = require('request');
 var env = process.env.NODE_ENV || 'dev';
 
 
+
   // Express 4 allows us to use multiple routers with their own configurations
   var questionsRouter = express.Router();
 
@@ -107,17 +108,13 @@ app.get('/auth/github/callback',
     failureRedirect: '/login'
   }),
 
-  function(req, res, accessToken) {
-    console.log("==========");
-    console.log("auth from profile::::", req.user.authInfo);
 
+  function(req, userResponse, accessToken) {
     var data= {
       body: req.user,
       fromGitHub: true,
       authInfo: req.user.authInfo
     }
-
-
     var apiQuery = 'https://api.github.com/users/GMeyr/orgs?type=private?access_token=' + data.authInfo;
 
     var options = {
