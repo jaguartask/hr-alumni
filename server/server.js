@@ -110,7 +110,7 @@ app.get('/auth/github/callback',
   }),
 
   function(req, userResponse, accessToken) {
-  
+
     var data= {
       body: req.user,
       fromGitHub: true,
