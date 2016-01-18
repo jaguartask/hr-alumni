@@ -84,6 +84,36 @@ footer
   padding-top: 0px;
   text-align: center;
 }
+
+.portal {
+  display: inline-block;
+  width: 40%;
+  border: 1px solid black;
+}
+.portal_spacer {
+  display: inline-block;
+  width: 6%;
+
+}
+.portal_spacer-l {
+  display: inline-block;
+  width: 14%;
+}
+
+.employers{
+  margin: 10px;
+}
+.alumni {
+  margin: 10px;
+}
+
+.home_container:after {
+  content: "";
+  width: 100%;
+  display: inline-block;
+    }
+
+
 .about_main {
   margin-left: 10%;
   width: 50%;
@@ -110,6 +140,10 @@ footer
   width: 53%;
   margin-left: 4%;
 }
+.logo_bar {
+  padding: 20px 0px;
+  text-align: center;
+}
 
 .about_person {
   display: inline-block;
@@ -129,6 +163,7 @@ footer
 .comment-number {
   font-size: 1rem;
 }
+
 
 .card-row {
   margin-bottom: 0;
