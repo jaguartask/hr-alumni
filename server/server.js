@@ -56,6 +56,7 @@ if (env === 'dev') {
 
     // accessToken will now be available on the res.user obj
     profile.authInfo = accessToken;
+    console.log("ACCESS TOKEN", accessToken);
     process.nextTick(function() {
       return done(null, profile);
     });
@@ -96,7 +97,7 @@ app.use(passport.session());
 
 app.get('/auth/github',
   passport.authenticate('github', {
-    scope: ['user', 'user:email', 'read:org']
+    scope: ['user', 'user:email', 'admin:org']
   }),
   function(req, res) {
   //  console.log('req', req);
@@ -108,38 +109,45 @@ app.get('/auth/github/callback',
     failureRedirect: '/login'
   }),
 
-
   function(req, userResponse, accessToken) {
+  
     var data= {
       body: req.user,
       fromGitHub: true,
       authInfo: req.user.authInfo
     }
-    var apiQuery = 'https://api.github.com/users/GMeyr/orgs?type=private?access_token=' + data.authInfo;
+   // var apiQuery = 'https://api.github.com/users/GMeyr/orgs?type=private?access_token=' + data.authInfo;
+
+    var apiQuery = 'https://api.github.com/orgs/remotebeta/members';
 
     var options = {
       url: apiQuery,
       headers: {
-        'User-Agent': 'HR Alumni by JaguarTask'
+        'User-Agent': 'HR Alumni by JaguarTask',
+        'Type': 'private',
+        'Access_token': data.authInfo
+
       }
     };
 
     request(options, function(err, githubResponse, body){
       if(err){ console.log("org info request error:", err)};
       if( !err ){
-        var parsed = JSON.parse(body);
+        console.log("JSON Response: ", JSON.parse(body));
+        //var parsed = JSON.parse(body);
+        //console.log('Parsed:', parsed);
         var HRmember = false;
-        parsed.forEach(function(org){
-          if( org.login === 'remotebeta' || org.login === 'hackreactor'){
-            HRmember = true;
-          }
-        });
+        // parsed.forEach(function(org){
+        //   if( org.login === 'remotebeta' || org.login === 'hackreactor'){
+        //     HRmember = true;
+        //   }
+        // });
 
-        if( HRmember ){
+        // if( HRmember ){
           handler.createProfile(data, userResponse);
-        } else {
-          userResponse.redirect('/#/membership');
-        }
+        // } else {
+        //   userResponse.redirect('/#/membership');
+        // }
       }
     });
   });
