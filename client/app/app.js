@@ -24,6 +24,10 @@ angular.module('myApp', [
       url: '/Hire',
       templateUrl: 'app/views/Hire.html',
     })
+    .state('about', {
+      url: '/about',
+      templateUrl: 'app/views/about.html',
+    })
     // .state('createProfile', {
     //   url: '/createProfile',
     //   templateUrl: 'app/views/createProfile.html'
