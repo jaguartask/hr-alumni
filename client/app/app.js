@@ -24,6 +24,10 @@ angular.module('myApp', [
       url: '/Hire',
       templateUrl: 'app/views/Hire.html',
     })
+    .state('about', {
+      url: '/about',
+      templateUrl: 'app/views/about.html',
+    })
     // .state('createProfile', {
     //   url: '/createProfile',
     //   templateUrl: 'app/views/createProfile.html'
@@ -32,14 +36,18 @@ angular.module('myApp', [
       url: '/login',
       templateUrl: 'app/views/login.html'
     })
-    // .state('profiles.profile', {
-    //   url: '/profiles',
-    //   templateUrl: 'app/views/profile.html'
-    // })
-    // .state('updateProfile', {
-    //   url: '/updateProfile/:githubName',
-    //   templateUrl: 'app/views/updateProfile.html'
-    // })
+    .state('logout', {
+      url: '/logout',
+      templateUrl: 'app/views/login.html'
+    })
+    .state('profiles.profile', {
+      url: '',
+      templateUrl: 'app/views/profile.html'
+    })
+    .state('updateProfile', {
+      url: '/updateProfile/:githubName',
+      templateUrl: 'app/views/updateProfile.html'
+    })
     .state('messageBoard', {
       url: '/messages',
       templateUrl: 'app/messageBoard/messages.html'
@@ -47,10 +55,6 @@ angular.module('myApp', [
     .state('post', {
       url: '/post/{id}',
       templateUrl: 'app/messageBoard/post.html'
-    })
-    .state('logout', {
-      url: '/logout',
-      templateUrl: 'app/views/login.html'
     })
     .state('membership', {
       url: '/membership',

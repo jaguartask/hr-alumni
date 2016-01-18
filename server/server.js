@@ -12,6 +12,7 @@ var request = require('request');
 var env = process.env.NODE_ENV || 'dev';
 
 
+
   // Express 4 allows us to use multiple routers with their own configurations
   var questionsRouter = express.Router();
 
@@ -52,7 +53,10 @@ if (env === 'dev') {
     passReqToCallback: true
   },
   function(req, accessToken, refreshToken, profile, done) {
+
+    // accessToken will now be available on the res.user obj
     profile.authInfo = accessToken;
+    console.log("ACCESS TOKEN", accessToken);
     process.nextTick(function() {
       return done(null, profile);
     });
@@ -93,11 +97,11 @@ app.use(passport.session());
 
 app.get('/auth/github',
   passport.authenticate('github', {
-    scope: ['user', 'user:email', 'read:org']
+    scope: ['user', 'user:email', 'admin:org']
   }),
   function(req, res) {
-    console.log('req', req);
-    console.log('res', res);
+  //  console.log('req', req);
+  // console.log('res!!!!!!!!!', res);
   });
 
 app.get('/auth/github/callback',
@@ -106,41 +110,50 @@ app.get('/auth/github/callback',
   }),
 
   function(req, userResponse, accessToken) {
-
+  
     var data= {
       body: req.user,
       fromGitHub: true,
       authInfo: req.user.authInfo
     }
+   // var apiQuery = 'https://api.github.com/users/GMeyr/orgs?type=private?access_token=' + data.authInfo;
 
-    var apiQuery = 'https://api.github.com/users/GMeyr/orgs?type=private?access_token=' + data.authInfo;
+    var apiQuery = 'https://api.github.com/users/' + req.user.githubName + '/orgs/';
 
     var options = {
       url: apiQuery,
       headers: {
-        'User-Agent': 'HR Alumni by JaguarTask'
+        'User-Agent': 'GMeyr',
+        'Access_token': data.authInfo,
+        'filter': 'all'
+
       }
     };
 
     request(options, function(err, githubResponse, body){
+      console.log("status", githubResponse);
       if(err){ console.log("org info request error:", err)};
       if( !err ){
         var parsed = JSON.parse(body);
         var HRmember = false;
-        parsed.forEach(function(org){
-          if( org.login === 'remotebeta' || org.login === 'hackreactor'){
-            HRmember = true;
-          }
-        });
+        // parsed.forEach(function(orgMember){
+        //   console.log('orgMember.login', orgMember.login);
+        //   console.log('data.body', data.body.username);
+        // });
+        // // parsed.forEach(function(orgMember){
 
-        if( HRmember ){
+        // //   if( orgMember.login === data.body.username ){
+        // //     HRmember = true;
+        // //   }
+        // // });
+
+        // if( HRmember ){
           handler.createProfile(data, userResponse);
-        } else {
-          userResponse.redirect('/#/membership');
-        }
+        // } else {
+        //   userResponse.redirect('/#/membership');
+        // }
       }
     });
-  
   });
 
 app.get('/', function(req, res) {
@@ -148,11 +161,15 @@ app.get('/', function(req, res) {
 });
 
 //insert util.checkUser before the handler function to restrict
-//page to logged-in users only
+//page to logged-in users only (as in the example below)
+//app.get('/api/profiles', util.checkUser, handler.findAll);
 app.get('/api/profiles', handler.findAll);
 app.post('/api/profiles', handler.createProfile);
-app.get('/api/profile/:githubName', handler.findOne);
-app.post('/api/updateProfile', handler.updateProfile);
+app.get('/api/profile/:githubName', handler.findOne);app.post('/api/updateProfile', handler.updateProfile)
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+})
 
 //message board routes
 app.get('/api/posts', msgBoardHandler.getAllPosts);

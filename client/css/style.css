@@ -84,7 +84,39 @@ footer
   padding-top: 0px;
   text-align: center;
 }
+.about_main {
+  margin-left: 10%;
+  width: 50%;
+}
+.about_people {
+  padding: 0px 0px;
+  width: 80%;
+  margin-left: 10%;
+}
 
+.about_title {
+  font-weight: bold;
+  color: #2874DD;
+}
+.team2 {
+  margin-left: 8%;
+}
+
+.about_person {
+  display: inline-block;
+  margin: 25px;
+}
+.about_person img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+}
+.about_person p {
+  margin: 0px;
+}
+.people_span {
+  padding: 0px 20px;
+}
 .comment-number {
   font-size: 1rem;
 }
