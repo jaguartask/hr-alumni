@@ -1,4 +1,4 @@
-angular.module('myApp.tracker', ['ui.materialize'])
+angular.module('myApp.tracker', [])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('tracker', {
