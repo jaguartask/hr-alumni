@@ -10,8 +10,8 @@ var UserSchema = new mongoose.Schema({
   },
 
   about: {
-    job: { type: Boolean, required: true },
-    invest: {type: Boolean, required: true},
+    job: { type: Boolean, required: true, default: false },
+    invest: {type: Boolean, required: true, default: false},
     summary: {type: String},
     status: {type: String}
   },

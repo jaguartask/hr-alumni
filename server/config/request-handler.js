@@ -63,7 +63,7 @@ exports.createProfile = function(req, res) {
             location: location
           },
           about: {
-            invest: invest,
+            invest: false,
             summary: summary,
             status: status
           },
