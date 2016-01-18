@@ -31,8 +31,8 @@ var env = process.env.NODE_ENV || 'dev';
 var passport = require('passport');
 var GithubStrategy = require('passport-github2').Strategy;
 
-var GITHUB_CLIENT_ID = '22590cfd0af2cf2c13e8';
-var GITHUB_CLIENT_SECRET = 'b84e52eb142c9a613677e11c76e1d0dc27cdfaa3';
+var GITHUB_CLIENT_ID = '';
+var GITHUB_CLIENT_SECRET = '';
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -46,8 +46,8 @@ passport.deserializeUser(function(obj, done) {
 if (env === 'dev') {
 
   passport.use(new GithubStrategy({
-    clientID: GITHUB_CLIENT_ID,
-    clientSecret: GITHUB_CLIENT_SECRET,
+    clientID: '0b692ace36fc620839ea',
+    clientSecret: '4466109ad476a5273f9ff10998a2c6926aa7217b',
     callbackURL: "http://localhost:3000/auth/github/callback",
     passReqToCallback: true
   },
@@ -64,8 +64,8 @@ mongoose.connect("mongodb://localhost/hralumnimark2");
 } else {
 
   passport.use(new GithubStrategy({
-    clientID: GITHUB_CLIENT_ID,
-    clientSecret: GITHUB_CLIENT_SECRET,
+    clientID: '22590cfd0af2cf2c13e8',
+    clientSecret: 'b84e52eb142c9a613677e11c76e1d0dc27cdfaa3',
     callbackURL: "https://hr-alumni.herokuapp.com/auth/github/callback",
     passReqToCallback: true
   },
