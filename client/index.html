@@ -28,31 +28,30 @@
 
   <body ng-app="myApp">
     <nav class="white" role="navigation" >
-     <div class="nav-wrapper container">
-      <a id="logo-container" href="#" class="brand-logo" ui-sref="home">HR Alumni</a>
-      <ul class="right hide-on-med-and-down">
-        <!-- <li><a ui-sref="createProfile">CreateProfile</a></li> -->
-
-        <li><a ui-sref="messageBoard">Message Board</a></li>
-        <li><a ui-sref="Hire">Hire</a></li>
-        <li><a ui-sref="profiles">My Profile</a></li>
-        <li><a ui-sref="tracker">Tracker</a></li>
-        <!-- <li><a ui-sref="profile">Individual Profile</a></li> -->
-        <li><a ui-sref="login">Login</a></li>
-        <li><a ui-sref="logout">Logout</a></li>
-      </ul>
-      <ul id="slide-out" class="side-nav">
-        <li><a class="btn btn-social btn-github text-center" href='/auth/github'>Update</a></li>
-        <!-- <li><a ui-sref="createProfile">CreateProfile</a></li> -->
-        <li><a href="/#/profiles">My Profile</a></li>
-        <li><a ui-sref="Hire">Hire</a></li>
-        <!-- <li><a ui-sref="profile">Individual Profile</a></li> -->
-        <li><a ui-sref="login">Login</a></li>
-        <li><a ui-sref="logout">Logout</a></li>
-      </ul>
-      <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-    </div>
-     </div>
+      <div class="nav-wrapper container">
+        <a id="logo-container" href="#" class="brand-logo" ui-sref="home">HR Alumni</a>
+        <ul class="right hide-on-med-and-down">
+          <!-- <li><a ui-sref="createProfile">CreateProfile</a></li> -->
+          <li><a class="btn btn-social btn-github text-center" href='/auth/github'>Update</a></li>
+          <li><a ui-sref="messageBoard">Message Board</a></li>
+          <li><a ui-sref="Hire">Hire</a></li>
+          <li><a ui-sref="profiles">Profiles</a></li>
+          <li><a ui-sref="tracker">Tracker</a></li>
+          <!-- <li><a ui-sref="profile">Individual Profile</a></li> -->
+          <li><a ui-sref="login">Login</a></li>
+          <li><a ui-sref="logout">Logout</a></li>
+        </ul>
+        <ul id="slide-out" class="side-nav">
+          <li><a class="btn btn-social btn-github text-center" href='/auth/github'>Update</a></li>
+          <!-- <li><a ui-sref="createProfile">CreateProfile</a></li> -->
+          <li><a href="/#/profiles">Profiles</a></li>
+          <li><a ui-sref="Hire">Hire</a></li>
+          <!-- <li><a ui-sref="profile">Individual Profile</a></li> -->
+          <li><a ui-sref="login">Login</a></li>
+          <li><a ui-sref="logout">Logout</a></li>
+        </ul>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+      </div>
     </nav>
 
     <div ui-view></div>
@@ -63,6 +62,6 @@
     <script src="js/init.js"></script>
     <script src="app/tracker/tracker.js"></script>
     <script src="app/tracker/trackerFactory.js"></script>
-    <script src="./lib/angular-materialize/src/angular-materialize.js"></script>
+    <!-- <script src="./lib/angular&#45;materialize/src/angular&#45;materialize.js"></script> -->
   </body>
 </html>

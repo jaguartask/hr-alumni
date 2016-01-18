@@ -1,133 +1,134 @@
 <div class="container">
-<div ng-controller="TrackerCtrl as tracker">
+  <div ng-controller="TrackerCtrl as tracker">
 
-<a class="waves-effect waves-light btn left modal-trigger" style="top: 25px; left: 25px" ng-click="addJob()" ><i class="material-icons left">library_add</i>Add Job</a>
-<div class="row">
-  <div class="input-field col s3 right">
-    <input ng-model="searchText" id="jobfilter" type="text" class="validate">
-    <label for="jobfilter">Search</label>
-  </div>
-</div>
-<!-- repeat template with jobs -->
-<ul class="collapsible popout" data-collapsible="accordion" watch>
-  <li ng-repeat="job in jobs | filter:!job.show | filter:searchText" >
-    <div class="collapsible-header" ><i class="material-icons">label_outline</i>
-      {{job.name}}
-      <i class="large material-icons right red-text text-darken-2" ng-click="remove(job)">close</i>
-      <i class="large material-icons right amber-text text-lighten-2" ng-click="update(job)">library_books</i>
-      <i class="large material-icons right teal-text text-lighten-2">done</i>
-
-    </div>
-    <div class="collapsible-body">
-      <table class="centered highlight responsive-table">
-        <thead>
-          <tr>
-            <th data-field="date" remove(job._id)>Date</th>
-            <th data-field="position">Position</th>
-            <th data-field="location">Location</th>
-            <th data-field="salary">Salary</th>
-            <th data-field="phone">Phone</th>
-            <th data-field="site">On-Site</th>
-            <th data-field="offer">Offer</th>
-            <th data-field="offer">Respond By</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>{{job.date}}</td>
-            <td>{{job.position}}</td>
-            <td>{{job.location}}</td>
-            <td>${{job.salary}}</td>
-            <td><i class="small material-icons" ng-show=!{{job.phone}}>call_end </i><i class="small material-icons" ng-show={{job.phone}}>call</i></td>
-            <td>{{job.site}}</td>
-            <td>{{job.offer}}</td>
-            <td>{{job.respond}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </li>
-</ul>
-<!--  update job modal -->
-
-<div id="updateJob" class="modal">
-  <div class="modal-content">
-    <h4>Update Company</h4>
+    <a class="waves-effect waves-light btn left modal-trigger" style="top: 25px; left: 25px" ng-click="addJob()" ><i class="material-icons left">library_add</i>Add Job</a>
     <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s6">
-            <input ng-model="user.offer" id="offer" type="text" class="validate">
-            <label for="Offer">Offer</label>
-          </div>
-          <div class="input-field col s6">
-            <input ng-model="user.site" id="site" type="text" class="validate">
-            <label for="site">On-Site</label>
-          </div>
+      <div class="input-field col s3 right">
+        <input ng-model="searchText" id="jobfilter" type="text" class="validate">
+        <label for="jobfilter">Search</label>
+      </div>
+    </div>
+    <!-- repeat template with jobs -->
+    <ul class="collapsible popout" data-collapsible="accordion" watch>
+      <li ng-repeat="job in jobs | filter:!job.show | filter:searchText" >
+        <div class="collapsible-header" ><i class="material-icons">label_outline</i>
+          {{job.name}}
+          <i class="large material-icons right red-text text-darken-2" ng-click="remove(job)">close</i>
+          <i class="large material-icons right amber-text text-lighten-2" ng-click="update(job)">library_books</i>
+          <i class="large material-icons right teal-text text-lighten-2">done</i>
+
         </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <input ng-model="user.name" id="Name" type="text" class="validate">
-            <label for="Name">Name</label>
-          </div>
-          <div class="input-field col s6">
-            <input ng-model="user.location" id="location" type="text" class="validate">
-            <label for="location">Location</label>
-          </div>
+        <div class="collapsible-body">
+          <table class="centered highlight responsive-table">
+            <thead>
+              <tr>
+                <th data-field="date" remove(job._id)>Date</th>
+                <th data-field="position">Position</th>
+                <th data-field="location">Location</th>
+                <th data-field="salary">Salary</th>
+                <th data-field="phone">Phone</th>
+                <th data-field="site">On-Site</th>
+                <th data-field="offer">Offer</th>
+                <th data-field="offer">Respond By</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>{{job.date}}</td>
+                <td>{{job.position}}</td>
+                <td>{{job.location}}</td>
+                <td>${{job.salary}}</td>
+                <td><i class="small material-icons" ng-show=!{{job.phone}}>call_end </i><i class="small material-icons" ng-show={{job.phone}}>call</i></td>
+                <td>{{job.site}}</td>
+                <td>{{job.offer}}</td>
+                <td>{{job.respond}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </li>
+    </ul>
+    <!--  update job modal -->
+
+    <div id="updateJob" class="modal">
+      <div class="modal-content">
+        <h4>Update Company</h4>
         <div class="row">
-          <div class="input-field col s6">
-            <input ng-model="user.position" id="position" type="text" class="validate">
-            <label for="position">Position</label>
-          </div>
-          <div class="input-field col s6">
-            <input ng-model="user.salary" id="salary" type="text" class="validate">
-            <label for="salary">Salary</label>
-          </div>
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <input ng-model="user.offer" id="offer" type="text" class="validate">
+                <label for="Offer">Offer</label>
+              </div>
+              <div class="input-field col s6">
+                <input ng-model="user.site" id="site" type="text" class="validate">
+                <label for="site">On-Site</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <input ng-model="user.name" id="Name" type="text" class="validate">
+                <label for="Name">Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input ng-model="user.location" id="location" type="text" class="validate">
+                <label for="location">Location</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <input ng-model="user.position" id="position" type="text" class="validate">
+                <label for="position">Position</label>
+              </div>
+              <div class="input-field col s6">
+                <input ng-model="user.salary" id="salary" type="text" class="validate">
+                <label for="salary">Salary</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="reset()">Dismiss</a>
+              <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="triggerJobUpdate(user)">Save</a>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- add job modal -->
+    <div id="addJob" class="modal">
+      <div class="modal-content">
+        <h4>Add Company</h4>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <input ng-model="user.name" id="Name" type="text" class="validate">
+                <label for="Name">Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input ng-model="user.location" id="location" type="text" class="validate">
+                <label for="location">Location</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <input ng-model="user.position" id="position" type="text" class="validate">
+                <label for="position">Position</label>
+              </div>
+              <div class="input-field col s6">
+                <input ng-model="user.salary" id="salary" type="text" class="validate">
+                <label for="salary">Salary</label>
+              </div>
+            </div>
         </div>
         <div class="modal-footer">
           <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="reset()">Dismiss</a>
-          <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="triggerJobUpdate(user)">Save</a>
+          <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="save(user)">Save</a>
         </div>
+      </div>
     </div>
+    <!-- end of accordion -->
   </div>
-</div>
-
-<!-- add job modal -->
-<div id="addJob" class="modal">
-  <div class="modal-content">
-    <h4>Add Company</h4>
-    <div class="row">
-      <form class="col s12">
-        <div class="row">
-          <div class="input-field col s6">
-            <input ng-model="user.name" id="Name" type="text" class="validate">
-            <label for="Name">Name</label>
-          </div>
-          <div class="input-field col s6">
-            <input ng-model="user.location" id="location" type="text" class="validate">
-            <label for="location">Location</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <input ng-model="user.position" id="position" type="text" class="validate">
-            <label for="position">Position</label>
-          </div>
-          <div class="input-field col s6">
-            <input ng-model="user.salary" id="salary" type="text" class="validate">
-            <label for="salary">Salary</label>
-          </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-      <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="reset()">Dismiss</a>
-      <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="save(user)">Save</a>
-    </div>
-  </div>
-</div>
-<!-- end of accordion -->
 </div>
 
 <script type="text/javascript" charset="utf-8">
