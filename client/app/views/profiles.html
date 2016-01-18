@@ -5,7 +5,7 @@
       <br>
       <a class="btn btn-social btn-github text-center" href='/auth/github'>Update</a>
       <br>
-  
+
       <ul class="collection">
         <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="profile in profiles | filter:query">
           <a href="" ng-click="modalDetails(profile)" class="modal-trigger title"><img ng-src="{{profile.contact.profilePic}}" alt="" class="circle"> {{profile.contact.name}}</a>
@@ -37,7 +37,7 @@
           <label>Blog</label>
           <a ng-href="{{profile.links.blog}}" target="_blank">{{profile.links.blog}} </a>
           <br/>
-          <label>LinkedIn</label><a ng-href="{{profile.links.linkedin}}"> {{profile.links.linkedin}} </a>
+          <label>LinkedIn</label><a ng-href="{{profile.links.linkedin}}" target="_blank"> {{profile.links.linkedin}} </a>
           <br/>
           <hr>
           <label>Employment Status</label> {{profile.about.status}}
