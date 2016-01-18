@@ -36,10 +36,10 @@ angular.module('myApp', [
     //   url: '/profiles',
     //   templateUrl: 'app/views/profile.html'
     // })
-    .state('updateProfile', {
-      url: '/updateProfile/:githubName',
-      templateUrl: 'app/views/updateProfile.html'
-    })
+    // .state('updateProfile', {
+    //   url: '/updateProfile/:githubName',
+    //   templateUrl: 'app/views/updateProfile.html'
+    // })
     .state('messageBoard', {
       url: '/messages',
       templateUrl: 'app/messageBoard/messages.html'

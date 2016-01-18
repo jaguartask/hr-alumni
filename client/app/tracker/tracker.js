@@ -34,7 +34,11 @@ angular.module('myApp.tracker', [])
       $('#addJob').openModal();
     }
     $scope.updateJob = function(){
+    resizeTextAreasOnFocus();
     $('#updateJob').openModal();
+    console.dir($('#updateJob'));
+    $('#updateJob').each(function(item){console.log(item.context)})
+
     }
 
   $scope.save = function(user) {
