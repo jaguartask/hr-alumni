@@ -149,17 +149,17 @@ app.get('/auth/github/callback',
 
         // if( HRmember ){
         var HRmember = true;
-        parsed.forEach(function(org){
-          if(org || org.login === 'remotebeta' || org.login === 'hackreactor'){
-            HRmember = true;
-          }
-        });
+        // parsed.forEach(function(org){
+        //   if(org || org.login === 'remotebeta' || org.login === 'hackreactor'){
+        //     HRmember = true;
+        //   }
+        // });
 
         if( HRmember ){
           handler.createProfile(data, userResponse);
-        // } else {
-        //   userResponse.redirect('/#/membership');
-        // }
+        } else {
+          userResponse.redirect('/#/membership');
+        }
       }
     });
   });
