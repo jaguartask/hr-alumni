@@ -89,8 +89,9 @@ footer
   width: 50%;
 }
 .about_people {
-  padding: 20px 0px;
+  padding: 0px 0px;
   width: 80%;
+  margin-left: 10%;
 }
 
 .about_title {
