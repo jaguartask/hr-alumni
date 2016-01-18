@@ -183,8 +183,12 @@ app.param('comment', msgBoardHandler.preloadComment); //preloading data, check m
 app.put('/api/posts/:post/comments/:comment/upvote', msgBoardHandler.upvoteComment);
 app.put('/api/posts/:post/comments/:comment/downvote', msgBoardHandler.downvoteComment);
 app.get('/api/posts/:post', msgBoardHandler.getPostComments);
+
+//profile routes
 app.get('/api/profile/:githubName', handler.findOne);
 app.post('/api/updateProfile', handler.updateProfile)
+
+//tracker routes
 app.post('/api/tracker', tracker.saveJob);
 app.get('/api/tracker', tracker.getJobs);
 app.post('/api/tracker/remove', tracker.removeJob);
