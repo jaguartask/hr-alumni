@@ -105,8 +105,7 @@ app.get('/auth/github/callback',
     failureRedirect: '/login'
   }),
 
-  function(req, userResponse, accessToken) {
-
+  function(req, res, accessToken) {
     var data= {
       body: req.user,
       fromGitHub: true,
@@ -140,7 +139,7 @@ app.get('/auth/github/callback',
         }
       }
     });
-  
+
   });
 
 app.get('/', function(req, res) {
