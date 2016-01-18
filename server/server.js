@@ -118,30 +118,34 @@ app.get('/auth/github/callback',
     }
    // var apiQuery = 'https://api.github.com/users/GMeyr/orgs?type=private?access_token=' + data.authInfo;
 
-    var apiQuery = 'https://api.github.com/orgs/remotebeta/members';
+    var apiQuery = 'https://api.github.com/users/' + req.user.githubName + '/orgs/';
 
     var options = {
       url: apiQuery,
       headers: {
-        'User-Agent': 'HR Alumni by JaguarTask',
-        'Type': 'private',
-        'Access_token': data.authInfo
+        'User-Agent': 'GMeyr',
+        'Access_token': data.authInfo,
+        'filter': 'all'
 
       }
     };
 
     request(options, function(err, githubResponse, body){
+      console.log("status", githubResponse);
       if(err){ console.log("org info request error:", err)};
       if( !err ){
-        console.log("JSON Response: ", JSON.parse(body));
-        //var parsed = JSON.parse(body);
-        //console.log('Parsed:', parsed);
+        var parsed = JSON.parse(body);
         var HRmember = false;
-        // parsed.forEach(function(org){
-        //   if( org.login === 'remotebeta' || org.login === 'hackreactor'){
-        //     HRmember = true;
-        //   }
+        // parsed.forEach(function(orgMember){
+        //   console.log('orgMember.login', orgMember.login);
+        //   console.log('data.body', data.body.username);
         // });
+        // // parsed.forEach(function(orgMember){
+
+        // //   if( orgMember.login === data.body.username ){
+        // //     HRmember = true;
+        // //   }
+        // // });
 
         // if( HRmember ){
           handler.createProfile(data, userResponse);
