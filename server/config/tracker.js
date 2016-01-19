@@ -3,7 +3,6 @@ var Job = require('../models/JobSchema');
 exports.saveJob = function(req, res, next) {
   console.log(req.body);
   var newJob = new Job(req.body);
-
   newJob
     .save()
     .then(function(result) {
@@ -29,7 +28,7 @@ exports.getUserJobs = function(req, res, next) {
 
 exports.getJobs = function(req, res, next) {
   Job
-    .find({userID: req.body.user})
+    .find({user: req.body.user})
     .then(function response(result) {
           return res.json(result);
         })
