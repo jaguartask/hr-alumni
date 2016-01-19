@@ -13,20 +13,32 @@ angular.module('myApp', [
   $stateProvider
     .state('home', {
       url:'/home',
-      templateUrl: 'app/views/home.html'
+      templateUrl: 'app/views/home.html',
+      data: {
+        requiresLogin: false
+      }
     })
     .state('profiles', {
       url: '/profiles',
-      templateUrl: 'app/views/profiles.html'
+      templateUrl: 'app/views/profiles.html',
+      data: {
+        requiresLogin: true
+      }
 
     })
     .state('Hire', {
       url: '/Hire',
       templateUrl: 'app/views/Hire.html',
+      data: {
+        requiresLogin: true
+      }
     })
     .state('about', {
       url: '/about',
       templateUrl: 'app/views/about.html',
+      data: {
+        requiresLogin: false
+      }
     })
     // .state('createProfile', {
     //   url: '/createProfile',
@@ -34,33 +46,70 @@ angular.module('myApp', [
     // })
     .state('login', {
       url: '/login',
-      templateUrl: 'app/views/login.html'
+      templateUrl: 'app/views/login.html',
+      data: {
+        requiresLogin: false
+      }
     })
     .state('logout', {
       url: '/logout',
-      templateUrl: 'app/views/login.html'
+      templateUrl: 'app/views/login.html',
+      data: {
+        requiresLogin: false
+      }
     })
     .state('profile', {
       url: '/profile/{githubName}',
-      templateUrl: 'app/views/profile.html'
+      templateUrl: 'app/views/profile.html',
+      data: {
+        requiresLogin: false
+      }
     })
     .state('updateProfile', {
       url: '/updateProfile/:githubName',
-      templateUrl: 'app/views/updateProfile.html'
+      templateUrl: 'app/views/updateProfile.html',
+      data: {
+        requiresLogin: false
+      }
     })
     .state('messageBoard', {
       url: '/messages',
-      templateUrl: 'app/messageBoard/messages.html'
+      templateUrl: 'app/messageBoard/messages.html',
+      data: {
+        requiresLogin: true
+      }
     })
     .state('post', {
       url: '/post/{id}',
-      templateUrl: 'app/messageBoard/post.html'
+      templateUrl: 'app/messageBoard/post.html',
+      data: {
+        requiresLogin: true
+      }
     })
     .state('membership', {
       url: '/membership',
-      templateUrl: 'app/views/membership.html'
+      templateUrl: 'app/views/membership.html',
+      data: {
+        requiresLogin: false
+      }
     });
 }])
+
+.run(function($rootScope, $state, Auth){
+    $rootScope.$on('$stateChangeStart', function(e, to) {
+      if (to.data && to.data.requiresLogin) {
+        
+        Auth.getUser().success(function(data){
+          if(data.length === 0) {
+            $rootScope.isLoggedIn = false;
+            //e.preventDefault();
+            $state.go('login');
+          }
+          $rootScope.isLoggedIn = true;
+        });
+      }
+    });
+})
 
 .controller('homeCtrl', ['$scope','$state', function ($scope, $state) {
 
