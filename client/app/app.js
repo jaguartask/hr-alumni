@@ -40,8 +40,8 @@ angular.module('myApp', [
       url: '/logout',
       templateUrl: 'app/views/login.html'
     })
-    .state('profiles.profile', {
-      url: '',
+    .state('profile', {
+      url: '/profile/{githubName}',
       templateUrl: 'app/views/profile.html'
     })
     .state('updateProfile', {
@@ -68,10 +68,13 @@ angular.module('myApp', [
 
 }])
 
-.controller('profileCtrl', ['$scope', 'Profile', function ($scope, Profile) {
+.controller('profileCtrl', ['$scope', 'HttpRequest', '$stateParams', function ($scope, HttpRequest,$stateParams) {
   console.log('controller gets called');
-  // $scope.currentProfile= Profile.getProfile();
-  console.log('currentProfile where it counts', $scope.currentProfile);
+  HttpRequest.getProfile($stateParams.githubName)
+    .success(function(data) {
+      console.log('Profile = ', data);
+      $scope.currentProfile = data[0];
+    });
 }])
 
 .controller('profilesCtrl', ['$scope', '$http', 'HttpRequest', 'Profile', function ($scope, $http, HttpRequest, Profile) {
@@ -184,11 +187,13 @@ angular.module('myApp', [
       method: 'GET',
       url: '/api/profile/'+githubName
     }).success(function(result){
-      console.log('Get profile res: ', result);
-      deferred.resolve(result);
-    }).error(function (result){
-      console.log('Get profile err: ', result);
-      deferred.reject(result);
+      // console.log('Get profile res: ', result);
+      // deferred.resolve(result);
+      return result;
+    }).error(function (err){
+      // console.log('Get profile err: ', result);
+      // deferred.reject(result);
+      return err;
     })
   }
 
