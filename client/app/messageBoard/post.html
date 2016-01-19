@@ -19,7 +19,7 @@
                 <p>{{ post.body }}</p>
               </div>
               <div class="divider"></div>
-              <p>created <time am-time-ago="post.createdAt"></time> by {{post.author}}
+              <p>created <time am-time-ago="post.createdAt"></time> by <a href="#/profile/{{post.profile}}">{{post.author}}</a>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@
             </div>
           </div>
           <div class="col s10 l10">
-            <p><div class="chip pink white-text">{{comment.author}}</div> <time am-time-ago="comment.createdAt"></time></p>
+            <p><div class="chip pink white-text"><span ui-sref="profile({githubName: comment.profile})">{{comment.author}}</span></div> <time am-time-ago="comment.createdAt"></time></p>
             <p>{{ comment.body }}</p>
             <div class="divider"></div>
           </div>
