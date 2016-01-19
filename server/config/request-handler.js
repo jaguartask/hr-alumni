@@ -5,6 +5,7 @@ exports.createProfile = function(req, res) {
 
   if(req.fromGitHub) {
     var name = req.body['_json'].name;
+    var githubID = req.body['_json'].id;
     var profilePic= req.body['_json']['avatar_url'];
     var githubName = req.body.username;
     var email = req.body['_json'].email;
@@ -55,6 +56,7 @@ exports.createProfile = function(req, res) {
       if (!user) {
         var newUser = new User({
 
+          githubID: githubID,
           contact: {
             name: name,
             profilePic: profilePic,
@@ -179,3 +181,14 @@ exports.updateProfile= function (req, res) {
           if(err) {console.log(err) }
         })
 }
+
+exports.getCurrentUser = function(req,res){
+  User.find({githubID: req.user}).exec(function(err, profile) {
+    if(!err) {
+      res.json(profile); 
+    }
+    else {
+      res.send(err);
+    }
+  });
+};
