@@ -16,18 +16,14 @@ angular.module('myApp.tracker', [])
   ];
   
   Auth.getUser()
-    .success(function(result) {
-      var user = result[0].githubID || null
-      TrackerFactory
-        .getJobs(user)
-        .success(function(data) {
-          $scope.jobs = data;
-        })
-      .error(function(err) {
-        console.log('err', err);
-      })
+    .then(function(result) {
+      console.log('user', result);
+      return result;
     })
-    .error(function(err) {
+    .then(function(result) {
+      console.log('promise2',result);
+    })
+    .then(null, function(err) {
       console.log(err);
     })
 
@@ -36,6 +32,14 @@ angular.module('myApp.tracker', [])
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
 
+      TrackerFactory
+        .getJobs()
+        .success(function(data) {
+          $scope.jobs = data;
+        })
+      .error(function(err) {
+        console.log('err', err);
+      })
 
     $scope.updateRespond = function(job) {
       $('#updateRespond').openModal();
@@ -97,10 +101,10 @@ angular.module('myApp.tracker', [])
    console.log('triiger update', job);
     TrackerFactory
       .updateJob(job)
-      .success(function(data) {
+      .then(function(data) {
         console.log(data);
       })
-      .error(function(err) {
+      .then(null, function(err) {
         console.log(err);
       })
  }
