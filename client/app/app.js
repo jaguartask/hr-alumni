@@ -59,8 +59,10 @@ angular.module('myApp', [
       },
       controller: function($rootScope, $http, $state) {
         $rootScope.isLoggedIn = function() { return false; };
-        $http.get('/auth/logout');
-        $state.go('home');
+        $http.get('/auth/logout').then(function(){
+          $state.go('home');
+        });
+        
       }
     })
     .state('profile', {
@@ -105,7 +107,7 @@ angular.module('myApp', [
       if (to.data && to.data.requiresLogin) {
         
         Auth.getUser().then(function(data){
-          if(data.length === 0) {
+          if(data.data.length === 0) {
             $rootScope.isLoggedIn = function(){return false;};
             //e.preventDefault();
             $state.go('login');
