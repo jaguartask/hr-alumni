@@ -11,7 +11,8 @@ var JobSchema = new mongoose.Schema({
   site: String,
   respond: String,
   show: Boolean,
-  editing: Boolean
+  editing: Boolean,
+  user: String
 });
 
 module.exports = mongoose.model('Job', JobSchema);

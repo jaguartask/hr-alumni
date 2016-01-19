@@ -7,28 +7,36 @@ angular.module('myApp.tracker', [])
   });
 })
 
-.controller('TrackerCtrl', function($scope, $state, TrackerFactory) {
+.controller('TrackerCtrl', function($scope, $state, TrackerFactory, Auth) {
   var monthNames = [
     "January", "February", "March",
     "April", "May", "June", "July",
     "August", "September", "October",
       "November", "December"
   ];
+  
+  Auth.getUser()
+    .success(function(result) {
+      var user = result[0].githubID || null
+      TrackerFactory
+        .getJobs(user)
+        .success(function(data) {
+          console.log(data);
+          $scope.jobs = data;
+        })
+      .error(function(err) {
+        console.log('err', err);
+      })
+    })
+    .error(function(err) {
+      console.log(err);
+    })
 
   var date = new Date();
   var day = date.getDate();
   var monthIndex = date.getMonth();
   var year = date.getFullYear();
 
-  TrackerFactory
-    .getJobs()
-    .success(function(data) {
-      console.log(data);
-      $scope.jobs = data;
-    })
-    .error(function(err) {
-      console.log('err', err);
-    })
 
     $scope.updateRespond = function(job) {
       console.log(job);

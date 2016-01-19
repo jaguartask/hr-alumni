@@ -2,8 +2,8 @@ angular.module('myApp.TrackerFactory', [])
 
 .factory('TrackerFactory', function($http) {
 
-  function getJobs() {
-    return $http.get('api/tracker')
+  function getJobs(user) {
+    return $http.get('api/tracker', user)
       .success(function(data) {
         return data;
       })
