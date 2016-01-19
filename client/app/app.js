@@ -104,7 +104,7 @@ angular.module('myApp', [
     $rootScope.$on('$stateChangeStart', function(e, to) {
       if (to.data && to.data.requiresLogin) {
         
-        Auth.getUser().success(function(data){
+        Auth.getUser().then(function(data){
           if(data.length === 0) {
             $rootScope.isLoggedIn = function(){return false;};
             //e.preventDefault();
