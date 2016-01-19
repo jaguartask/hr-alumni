@@ -15,8 +15,9 @@ exports.saveJob = function(req, res, next) {
 };
 
 exports.getJobs = function(req, res, next) {
+  console.log('get', req.body.user);
   Job
-    .find({})
+    .find({userID: req.body.user})
     .then(function response(result) {
           return res.json(result);
         })
