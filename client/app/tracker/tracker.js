@@ -1,5 +1,4 @@
 angular.module('myApp.tracker', [])
-
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('tracker', {
     url: '/tracker',
@@ -11,42 +10,30 @@ angular.module('myApp.tracker', [])
 })
 
 .controller('TrackerCtrl', function($scope, $state, TrackerFactory, Auth) {
-  var monthNames = [
-    "January", "February", "March",
-    "April", "May", "June", "July",
-    "August", "September", "October",
-      "November", "December"
-  ];
-  
+  // get user messages
   Auth.getUser()
     .then(function(result) {
-      console.log('user', result);
-      return result;
+      var id = result.data[0].githubID;
+      $scope.id = id;
+      return TrackerFactory.getJobs(id)
     })
     .then(function(result) {
-      console.log('promise2',result);
+      console.log(result);
+      $scope.jobs = result.data
     })
     .then(null, function(err) {
       console.log(err);
     })
 
-  var date = new Date();
-  var day = date.getDate();
-  var monthIndex = date.getMonth();
-  var year = date.getFullYear();
-
-      TrackerFactory
-        .getJobs()
-        .success(function(data) {
-          $scope.jobs = data;
-        })
-      .error(function(err) {
-        console.log('err', err);
-      })
-
+// update respond
     $scope.updateRespond = function(job) {
       $('#updateRespond').openModal();
-    }
+    };
+
+  $scope.updateRespondData = function(job) {
+    $scope.triggerJobUpdate(job);
+  };
+// update phone
     $scope.updatePhone = function(job) {
       if(!job.phone) {
         job.phone = true;
@@ -55,45 +42,41 @@ angular.module('myApp.tracker', [])
       }
       $scope.triggerJobUpdate(job);
       return job.phone;
-    }
+    };
 
+// dinamic editing - not used currently
     $scope.edit = function(job) {
       job.editing = true;
-    }
+    };
 
     $scope.doneEditing = function(job) {
       job.editing = false;
-
       $scope.triggerJobUpdate(job);
-    }
+    };
 
+    // add new job to list/
     $scope.addJob = function(){
       $('#addJob').openModal();
-    }
+    };
+
+  $scope.save = function(user) {
+    user.user = $scope.id;
+    TrackerFactory
+      .saveJob(user)
+      .then(function(data) {
+        $state.reload();
+        $scope.user = {};
+      })
+      .then(null, function(err) {
+      })
+  };
+
+    // update job
     $scope.updateJob = function(){
       var data = this.data;
     $('#updateJob').openModal();
       this.user = data;
-    }
-
-  $scope.save = function(user) {
-    user.offer = 'not yet';
-    user.date = day + ' ' + monthNames[monthIndex];
-    user.phone = false;
-    user.site = ' ';
-    user.respond = 'Insert Date';
-    user.show = true;
-    user.editing = false;
-    TrackerFactory
-      .saveJob(user)
-      .success(function(data) {
-        $state.reload();
-        $scope.user = {};
-      })
-      .error(function(err) {
-      })
-  };
-  
+    };
 
   $scope.update = function(job) {
     $scope.data = job;
@@ -112,18 +95,15 @@ angular.module('myApp.tracker', [])
       })
  }
 
-  $scope.updateRespondData = function(job) {
-    $scope.triggerJobUpdate(job);
-  }
-
+// delete and reset
   $scope.remove = function(job) {
     job.show = false;
     TrackerFactory
       .removeJob(job)
-      .success(function(data) {
+      .then(function(data) {
         console.log(data);
       })
-      .error(function(err) {
+      .then(null, function(err) {
         console.log(err);
       })
   }
