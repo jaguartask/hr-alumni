@@ -167,33 +167,33 @@ app.get('/', function(req, res) {
 //insert util.checkUser before the handler function to restrict
 //page to logged-in users only (as in the example below)
 //app.get('/api/profiles', util.checkUser, handler.findAll);
-app.get('/api/profiles', handler.findAll);
-app.post('/api/profiles', handler.createProfile);
-app.get('/api/profile/:githubName', handler.findOne);app.post('/api/updateProfile', handler.updateProfile)
+app.get('/api/profiles', isAuthenticated, handler.findAll);
+app.post('/api/profiles', isAuthenticated, handler.createProfile);
+app.get('/api/profile/:githubName', isAuthenticated, handler.findOne);
+app.post('/api/updateProfile', isAuthenticated, handler.updateProfile);
 app.get('/auth/logout', function(req, res){
   req.logout();
-  res.redirect('/');
+  res.end();
 })
 
 //message board routes
-app.get('/api/posts', msgBoardHandler.getAllPosts);
-app.post('/api/posts', msgBoardHandler.savePost);
-app.param('post', msgBoardHandler.preloadPost); //preloading data, check msgBoardHandler
-app.get('/api/posts/:post', msgBoardHandler.getPost);
-app.put('/api/posts/:post/upvote', msgBoardHandler.upvotePost);
-app.put('/api/posts/:post/downvote', msgBoardHandler.downvotePost);
-app.post('/api/posts/:post/comments', msgBoardHandler.addComment);
-app.param('comment', msgBoardHandler.preloadComment); //preloading data, check msgBoardHandler
-app.put('/api/posts/:post/comments/:comment/upvote', msgBoardHandler.upvoteComment);
-app.put('/api/posts/:post/comments/:comment/downvote', msgBoardHandler.downvoteComment);
-app.get('/api/posts/:post', msgBoardHandler.getPostComments);
-app.get('/api/profile/:githubName', handler.findOne);
-app.post('/api/updateProfile', handler.updateProfile)
-app.post('/api/tracker', tracker.saveJob);
-app.get('/api/tracker/:user', tracker.getUserJobs);
-app.get('/api/tracker/', tracker.getJobs);
-app.post('/api/tracker/remove', tracker.removeJob);
-app.post('/api/tracker/update', tracker.updateJob);
+app.get('/api/posts', isAuthenticated, msgBoardHandler.getAllPosts);
+app.post('/api/posts', isAuthenticated, msgBoardHandler.savePost);
+app.param('post', isAuthenticated, msgBoardHandler.preloadPost); //preloading data, check msgBoardHandler
+app.get('/api/posts/:post', isAuthenticated, msgBoardHandler.getPost);
+app.put('/api/posts/:post/upvote', isAuthenticated, msgBoardHandler.upvotePost);
+app.put('/api/posts/:post/downvote', isAuthenticated, msgBoardHandler.downvotePost);
+app.post('/api/posts/:post/comments', isAuthenticated, msgBoardHandler.addComment);
+app.param('comment', isAuthenticated, msgBoardHandler.preloadComment); //preloading data, check msgBoardHandler
+app.put('/api/posts/:post/comments/:comment/upvote', isAuthenticated, msgBoardHandler.upvoteComment);
+app.put('/api/posts/:post/comments/:comment/downvote', isAuthenticated, msgBoardHandler.downvoteComment);
+app.get('/api/posts/:post', isAuthenticated, msgBoardHandler.getPostComments);
+app.get('/api/profile/:githubName', isAuthenticated, handler.findOne);
+app.post('/api/updateProfile', isAuthenticated, handler.updateProfile)
+app.post('/api/tracker', isAuthenticated, tracker.saveJob);
+app.get('/api/tracker', isAuthenticated, tracker.getJobs);
+app.post('/api/tracker/remove', isAuthenticated, tracker.removeJob);
+app.post('/api/tracker/update', isAuthenticated, tracker.updateJob);
 
 function isAuthenticated(req,res,next){
     if(req.isAuthenticated()) { 
