@@ -5,6 +5,11 @@
  *
  * Made By MaterializeCSS.com
  */
+ label{
+   font-size: 110%;
+   color: black;
+   margin: 5px 5px 15px 15px;
+ }
 
 nav ul a,
 nav .brand-logo {
