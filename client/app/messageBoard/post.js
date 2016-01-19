@@ -13,10 +13,10 @@ angular.module('myApp.post', [])
   	  $scope.error = 'Ooopsss...something went wrong. Please try again later.';
   });
 
-  Auth.getUser().success(function(user) {
+  Auth.getUser().then(function(user) {
     if(user.length !== 0)
-      console.log('USER: ', user[0]);
-      $scope.user = user[0];
+      console.log('USER: ', user.data[0]);
+      $scope.user = user.data[0];
   });
 
   $scope.addComment = function() {

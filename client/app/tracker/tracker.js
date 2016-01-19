@@ -3,7 +3,10 @@ angular.module('myApp.tracker', [])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('tracker', {
     url: '/tracker',
-    templateUrl: '/app/tracker/tracker.html'
+    templateUrl: '/app/tracker/tracker.html',
+    data: {
+        requiresLogin: true
+      }
   });
 })
 

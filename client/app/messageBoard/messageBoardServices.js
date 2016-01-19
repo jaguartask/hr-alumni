@@ -1,11 +1,7 @@
 angular.module('myApp.MessageBoardService', [])
 
 .factory('messageBoardFactory', ['$http', function($http) {
-  var id = 3;
-  var posts = [ 
-    {id: 1, title: 'Post 1', body: 'some bs about cats :D', author: 'bill', comments: [{comment: 'meow', author: 'tacocat'}]},
-    {id: 2, title: 'Very important post 2', body: 'aint anybody has time for that', author: 'swampbilly', comments: [{comment: 'write your blog posts', author: 'taylor'}]}
-  ];
+
   var getPosts = function() {
     return $http.get('/api/posts')
       .success(function(data) {
@@ -16,9 +12,8 @@ angular.module('myApp.MessageBoardService', [])
       });
   };
   var createPost = function(post) {
-    post.id = id++;
-    post.comments = [];
-    posts.push(post);
+    // post.comments = [];
+    // posts.push(post);
     return $http.post('/api/posts', post)
       .success(function(data) {
         return data;
