@@ -194,6 +194,7 @@ app.post('/api/tracker', isAuthenticated, tracker.saveJob);
 app.get('/api/tracker', isAuthenticated, tracker.getJobs);
 app.post('/api/tracker/remove', isAuthenticated, tracker.removeJob);
 app.post('/api/tracker/update', isAuthenticated, tracker.updateJob);
+app.get('/api/tracker/:id', isAuthenticated, tracker.getJobs);
 
 function isAuthenticated(req,res,next){
     if(req.isAuthenticated()) { 
