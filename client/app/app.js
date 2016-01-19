@@ -69,10 +69,10 @@ angular.module('myApp', [
 }])
 
 .controller('profileCtrl', ['$scope', 'HttpRequest', '$stateParams', function ($scope, HttpRequest,$stateParams) {
-  console.log('controller gets called');
+  //console.log('controller gets called');
   HttpRequest.getProfile($stateParams.githubName)
     .success(function(data) {
-      console.log('Profile = ', data);
+      //console.log('Profile = ', data);
       $scope.currentProfile = data[0];
     });
 }])
@@ -226,11 +226,11 @@ angular.module('myApp', [
     return $http.get('/auth/currentuser').
       success(function (data) {
           if(data.length === 0) {
-            console.log('not logged in');
+            //console.log('not logged in');
             return [];
           }
           else {
-            console.log('logged in: ', data);
+            //console.log('logged in: ', data);
             return data;
           }
       }).
