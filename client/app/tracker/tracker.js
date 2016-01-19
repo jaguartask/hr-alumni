@@ -30,11 +30,38 @@ angular.module('myApp.tracker', [])
       console.log('err', err);
     })
 
+    $scope.updateRespond = function(job) {
+      console.log(job);
+      $('#updateRespond').openModal();
+    }
+    $scope.updatePhone = function(job) {
+      if(!job.phone) {
+        job.phone = true;
+      } else {
+        job.phone = false;
+      }
+      $scope.triggerJobUpdate(job);
+      return job.phone;
+    }
+
+    $scope.edit = function(job) {
+      console.log(job);
+      job.editing = true;
+    }
+
+    $scope.doneEditing = function(job) {
+      job.editing = false;
+
+      $scope.triggerJobUpdate(job);
+    }
+
     $scope.addJob = function(){
       $('#addJob').openModal();
     }
     $scope.updateJob = function(){
+      var data = this.data;
     $('#updateJob').openModal();
+      this.user = data;
     }
 
   $scope.save = function(user) {
@@ -43,8 +70,9 @@ angular.module('myApp.tracker', [])
     user.date = day + ' ' + monthNames[monthIndex];
     user.phone = false;
     user.site = ' ';
-    user.respond = ' ';
+    user.respond = 'Insert Date';
     user.show = true;
+    user.editing = false;
     TrackerFactory
       .saveJob(user)
       .success(function(data) {
@@ -55,14 +83,15 @@ angular.module('myApp.tracker', [])
         console.log(err);
       })
   };
+  
 
   $scope.update = function(job) {
-    $scope.user = job;
+    $scope.data = job;
     $scope.updateJob();
   }
 
  $scope.triggerJobUpdate = function(job) {
-   console.log('triiger update');
+   console.log('triiger update', job);
     TrackerFactory
       .updateJob(job)
       .success(function(data) {
@@ -72,6 +101,11 @@ angular.module('myApp.tracker', [])
         console.log(err);
       })
  }
+
+  $scope.updateRespondData = function(job) {
+    console.log(job);
+    $scope.triggerJobUpdate(job);
+  }
 
   $scope.remove = function(job) {
     console.log(job);

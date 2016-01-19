@@ -10,7 +10,8 @@ var JobSchema = new mongoose.Schema({
   salary: String,
   site: String,
   respond: String,
-  show: Boolean
+  show: Boolean,
+  editing: Boolean
 });
 
 module.exports = mongoose.model('Job', JobSchema);

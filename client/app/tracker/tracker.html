@@ -37,10 +37,12 @@
             <td>{{job.position}}</td>
             <td>{{job.location}}</td>
             <td>${{job.salary}}</td>
-            <td><i class="small material-icons" ng-show=!{{job.phone}}>call_end </i><i class="small material-icons" ng-show={{job.phone}}>call</i></td>
+            <td ng-click='updatePhone(job)'>
+              <i class="small material-icons red-text text-darken-2" ng-show="!job.phone">call_end </i>
+              <i class="small material-icons green-text text-darken-2" ng-show='job.phone'>call</i></td>
             <td>{{job.site}}</td>
             <td>{{job.offer}}</td>
-            <td>{{job.respond}}</td>
+            <td ng-click="updateRespond(job)">{{job.respond}}</td>
           </tr>
         </tbody>
       </table>
@@ -54,34 +56,34 @@
     <h4>Update Company</h4>
     <div class="row">
       <form class="col s12">
-        <div class="row">
+        <div class="row ">
           <div class="input-field col s6">
             <input placeholder={{user.offer}} ng-model="user.offer" id="offer" type="text" class="validate">
-            <label for="Offer">Offer</label>
+            <label class="active" for="Offer">Offer</label>
           </div>
           <div class="input-field col s6">
             <input ng-model="user.site" id="site" type="text" class="validate">
-            <label for="site">On-Site</label>
+            <label class="active" for="site">On-Site</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <input ng-model="user.name" id="Name" type="text" class="validate">
-            <label for="Name">Name</label>
+            <input ng-model="user.name" id="Name" type="text" class="validate" >
+            <label class="active" for="Name">Name</label>
           </div>
           <div class="input-field col s6">
             <input ng-model="user.location" id="location" type="text" class="validate">
-            <label for="location">Location</label>
+            <label class="active" for="location">Location</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
             <input ng-model="user.position" id="position" type="text" class="validate">
-            <label for="position">Position</label>
+            <label class="active" for="position">Position</label>
           </div>
           <div class="input-field col s6">
             <input ng-model="user.salary" id="salary" type="text" class="validate">
-            <label for="salary">Salary</label>
+            <label class="active" for="salary">Salary</label>
           </div>
         </div>
       </form>
@@ -127,7 +129,26 @@
     <a class=" modal-action modal-close waves-effect waves-green btn-flat" ng-click="save(user)">Save</a>
   </div>
 </div>
+<!-- update modals -->
 
+  <!-- Modal Structure -->
+  <div id="updateRespond" class="modal">
+    <div class="modal-content">
+      <h4>Insert Date</h4>
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input ng-model="user.respond" id="location" type="text" class="validate">
+            <label for="Date">Date</label>
+          </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-green btn-flat">Dismiss</a>
+      <a ng-click="updateRespondData(user)" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
 <!-- end of accordion -->
 </div>
 <script type="text/javascript" charset="utf-8">
