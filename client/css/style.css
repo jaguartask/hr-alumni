@@ -106,6 +106,10 @@ footer
   background-color: #DFF0D8;
 }
 
+.portal .btn {
+  margin-left: 20px;
+}
+
 .employers{
   margin: 20px;
 }
