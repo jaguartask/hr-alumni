@@ -28,6 +28,7 @@ angular.module('myApp.post', [])
     		$scope.post.comments.push(data);
     	});
     $scope.body = '';
+    $('#createComment').closeModal();
   };
 
   $scope.upvoteComment = function(comment) {
