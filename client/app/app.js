@@ -214,5 +214,27 @@ angular.module('myApp', [
     setProfile: setProfile,
     getProfile: getProfile
   }
+})
 
-});
+.factory('Auth', ['$http', function($http) {
+  var getUser = function() {
+    return $http.get('/auth/currentuser').
+      success(function (data) {
+          if(data.length === 0) {
+            console.log('not logged in');
+            return [];
+          }
+          else {
+            console.log('logged in: ', data);
+            return data;
+          }
+      }).
+      error(function () {
+          console.log('Login failed');
+      });
+  };
+  return {
+    getUser: getUser,
+    //isLoggedIn: isLoggedIn
+  };
+}]);

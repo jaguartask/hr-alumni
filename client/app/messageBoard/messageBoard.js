@@ -1,6 +1,7 @@
 angular.module('myApp.messageBoard', [])
 
-.controller('messageBoardCtrl', ['$scope', 'messageBoardFactory', '$state', function($scope, messageBoardFactory, $state) {
+.controller('messageBoardCtrl', ['$scope', 'messageBoardFactory', '$state', 'Auth', function($scope, messageBoardFactory, $state, Auth) {
+
   messageBoardFactory.getPosts()
     .success(function(data) {
       $scope.posts = data;
@@ -8,7 +9,10 @@ angular.module('myApp.messageBoard', [])
     .error(function(err) {
       $scope.error = 'Ooopsss...something went wrong. Please try again later.';
     });
-
+  Auth.getUser().success(function(user) {
+    if(user.length !== 0)
+      console.log('USER: ', user[0]);
+  });
   $scope.createPost = function() {
     if($scope.title) {
       var post = {};

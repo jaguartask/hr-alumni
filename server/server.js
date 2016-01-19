@@ -10,33 +10,32 @@ var bodyParser  = require('body-parser');
 var tracker = require('./config/tracker.js');
 var request = require('request');
 var env = process.env.NODE_ENV || 'dev';
-
-
-
-  // Express 4 allows us to use multiple routers with their own configurations
-  var questionsRouter = express.Router();
-
-  app.use(bodyParser.urlencoded({extended: true}));
-  app.use(bodyParser.json());
-  app.use(express.static(__dirname + '/../client'));
-
-
-  app.use('/api/profiles', questionsRouter); // use questions router for all questions request
-
-
-  // inject our routers into their respective route files
-  // require('./config/request-handler.js')(questionsRouter);
-
-
 // github auth
 var passport = require('passport');
 var GithubStrategy = require('passport-github2').Strategy;
+
+
+// Express 4 allows us to use multiple routers with their own configurations
+var questionsRouter = express.Router();
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(express.static(__dirname + '/../client'));
+
+
+app.use('/api/profiles', questionsRouter); // use questions router for all questions request
+
+
+// inject our routers into their respective route files
+// require('./config/request-handler.js')(questionsRouter);
+
+
 
 var GITHUB_CLIENT_ID = '';
 var GITHUB_CLIENT_SECRET = '';
 
 passport.serializeUser(function(user, done) {
-  done(null, user);
+  done(null, user.id);
 });
 
 passport.deserializeUser(function(obj, done) {
@@ -47,20 +46,21 @@ passport.deserializeUser(function(obj, done) {
 if (env === 'dev') {
 
   passport.use(new GithubStrategy({
-    clientID: '0b692ace36fc620839ea',
-    clientSecret: '4466109ad476a5273f9ff10998a2c6926aa7217b',
-    callbackURL: "http://localhost:3000/auth/github/callback",
-    passReqToCallback: true
-  },
-  function(req, accessToken, refreshToken, profile, done) {
+      clientID: '0b692ace36fc620839ea',
+      clientSecret: '4466109ad476a5273f9ff10998a2c6926aa7217b',
+      callbackURL: "http://localhost:3000/auth/github/callback",
+      passReqToCallback: true
+    },
+    function(req, accessToken, refreshToken, profile, done) {
 
-    // accessToken will now be available on the res.user obj
-    profile.authInfo = accessToken;
-    console.log("ACCESS TOKEN", accessToken);
-    process.nextTick(function() {
-      return done(null, profile);
-    });
-  }
+      // accessToken will now be available on the res.user obj
+      profile.authInfo = accessToken;
+      console.log("ACCESS TOKEN", accessToken);
+
+      process.nextTick(function() {
+        return done(null, profile);
+      });
+    }
 ));
 
 mongoose.connect("mongodb://localhost/hralumnimark2");
@@ -84,8 +84,6 @@ mongoose.connect("mongodb://localhost/hralumnimark2");
 mongoose.connect('mongodb://alumni:alumni@ds047095.mongolab.com:47095/heroku_2v9zdb19');
 }
 
-app.use(express.static(__dirname + '/../client'));
-
 app.use(session({
   secret: 'lambo',
   resave: false,
@@ -97,20 +95,16 @@ app.use(passport.session());
 
 app.get('/auth/github',
   passport.authenticate('github', {
-    scope: ['user', 'user:email', 'admin:org']
+    scope: ['user', 'user:email', 'read:org']
   }),
   function(req, res) {
-  //  console.log('req', req);
-  // console.log('res!!!!!!!!!', res);
+    //wont get called cause request is redirected to github
   });
 
 app.get('/auth/github/callback',
-  passport.authenticate('github', {
-    failureRedirect: '/login'
-  }),
-
+  passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, userResponse, accessToken) {
-
+    //successful authentication
     var data= {
       body: req.user,
       fromGitHub: true,
@@ -131,7 +125,7 @@ app.get('/auth/github/callback',
     };
 
     request(options, function(err, githubResponse, body){
-      console.log("status", githubResponse);
+      
       if(err){ console.log("org info request error:", err)};
       if( !err ){
         var parsed = JSON.parse(body);
@@ -156,6 +150,7 @@ app.get('/auth/github/callback',
         // });
 
         if( HRmember ){
+          console.log('DATA', data);
           handler.createProfile(data, userResponse);
         } else {
           userResponse.redirect('/#/membership');
@@ -201,6 +196,16 @@ app.post('/api/tracker', tracker.saveJob);
 app.get('/api/tracker', tracker.getJobs);
 app.post('/api/tracker/remove', tracker.removeJob);
 app.post('/api/tracker/update', tracker.updateJob);
+
+function isAuthenticated(req,res,next){
+    if(req.isAuthenticated()) { 
+      return next();
+    }
+    console.log('****************\nNOT LOGGED IN\n****************\n')
+    //res.redirect('/#/login');
+    res.send([]);
+};
+app.get('/auth/currentuser',isAuthenticated, handler.getCurrentUser);
 
 app.listen(port, function() {
   console.log('Server started on port: ' + port);
