@@ -84,36 +84,104 @@ footer
   padding-top: 0px;
   text-align: center;
 }
-.about_main {
-  margin-left: 10%;
-  width: 50%;
+
+.portal {
+  display: inline-block;
+  width: 40%;
+  border: 1px solid black;
+  background-color: #FFFFFF;
 }
+.portal_spacer {
+  display: inline-block;
+  width: 6%;
+
+}
+.portal_spacer-l {
+  display: inline-block;
+  width: 14%;
+}
+.home_container {
+  border: 2px solid #0d47a1;
+  margin-top: 20px;
+  background-color: #DFF0D8;
+}
+
+.portal .btn {
+  margin-left: 20px;
+}
+
+.employers{
+  margin: 20px;
+}
+.alumni {
+  margin: 20px;
+}
+
+.home_container:after {
+  content: "";
+  width: 100%;
+  display: inline-block;
+    }
+
+
 .about_people {
-  padding: 0px 0px;
-  width: 80%;
-  margin-left: 10%;
+  width: 60%;
+  border-top: 1px solid #2874DD;
+  border-bottom: 1px solid #2874DD;
+  margin: 0px !important;
+  padding: 0px;
+
 }
 
 .about_title {
   font-weight: bold;
-  color: #2874DD;
+  color: #26A69A;
 }
 .team2 {
   margin-left: 8%;
 }
 
+.logo_bar {
+  padding: 40px 0px;
+  margin: 30px 0px 40px 0px;
+  text-align: center;
+}
+.intro_bar {
+  padding: 20px 0px;
+  text-align: center;
+  margin-bottom: 35px;
+  background-color: #FFFFFF;
+}
+
 .about_person {
   display: inline-block;
-  margin: 25px;
+  margin: 10px;
+}
+
+.about_person_l {
+  display: inline-block;
+  margin: 0px 10px 0px 0px;
+}
+.about_person_r {
+  display: inline-block;
+  margin: 0px 10px 0px 0px;
 }
 .about_person img {
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
 }
-.about_person p {
-  margin: 0px;
+.about_person_l img {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
 }
+.about_person_r img {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+}
+
 .people_span {
   padding: 0px 20px;
 }
@@ -121,6 +189,9 @@ footer
   font-size: 1rem;
 }
 
+.about_top{
+  width: 60%;
+}
 .card-row {
   margin-bottom: 0;
 }
