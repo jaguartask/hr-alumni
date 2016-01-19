@@ -56,20 +56,25 @@ angular.module('myApp', [
       templateUrl: 'app/views/login.html',
       data: {
         requiresLogin: false
+      },
+      controller: function($rootScope, $http, $state) {
+        $rootScope.isLoggedIn = function() { return false; };
+        $http.get('/auth/logout');
+        $state.go('home');
       }
     })
     .state('profile', {
       url: '/profile/{githubName}',
       templateUrl: 'app/views/profile.html',
       data: {
-        requiresLogin: false
+        requiresLogin: true
       }
     })
     .state('updateProfile', {
       url: '/updateProfile/:githubName',
       templateUrl: 'app/views/updateProfile.html',
       data: {
-        requiresLogin: false
+        requiresLogin: true
       }
     })
     .state('messageBoard', {
@@ -101,11 +106,11 @@ angular.module('myApp', [
         
         Auth.getUser().success(function(data){
           if(data.length === 0) {
-            $rootScope.isLoggedIn = false;
+            $rootScope.isLoggedIn = function(){return false;};
             //e.preventDefault();
             $state.go('login');
           }
-          $rootScope.isLoggedIn = true;
+          $rootScope.isLoggedIn = function(){return true;};
         });
       }
     });
@@ -157,8 +162,9 @@ angular.module('myApp', [
 //   }
 // }])
 
-.controller('updateProfileCtrl', ['$scope', '$stateParams','HttpRequest', function ($scope, $stateParams, HttpRequest){
+.controller('updateProfileCtrl', ['$scope', '$stateParams','HttpRequest', '$rootScope', function ($scope, $stateParams, HttpRequest, $rootScope){
   console.log('$stateParams are: ', $stateParams);
+  $rootScope.isLoggeIn = function(){return true;};
   // redirects to /updateProfile/:githubName
   // $scope.submitProfile = function (isValid, formData) {
   //       console.log('formData', formData);
