@@ -12,16 +12,19 @@ angular.module('myApp.messageBoard', [])
   Auth.getUser().success(function(user) {
     if(user.length !== 0)
       console.log('USER: ', user[0]);
+      $scope.user = user[0];
   });
   $scope.createPost = function() {
     if($scope.title) {
       var post = {};
       post.title = $scope.title;
       post.body = $scope.body;
-      post.author = 'bobby';
+      post.author = $scope.user.contact.name;
+      post.profile = $scope.user.contact.githubName;
       messageBoardFactory
         .createPost(post)
         .success(function(data) {
+          $('#createPost').closeModal()
           $state.go('post', {id: data._id});
         })
         .error(function(err) {

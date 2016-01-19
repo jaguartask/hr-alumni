@@ -17,7 +17,7 @@
 						<div class="col s11 l11">
 							<span class="card-title"><a href="#/post/{{ post._id }}">{{ post.title }}</a></span>
 							<div class="divider"></div>
-							<p>created <time am-time-ago="post.createdAt"></time> by {{post.author}}
+							<p>created <time am-time-ago="post.createdAt"></time> by <a href="#/profile/{{ post.profile }}">{{post.author}}</a>
 							<span class="right"><span class="comment-number">{{ post.comments.length }}</span> <i class="tiny material-icons">textsms</i></span></p>
 						</div>
 					</div>
