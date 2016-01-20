@@ -24,14 +24,14 @@
           </div>
         </div>
       </div>
-      <div class="card-panel hoverable">
+      <div class="card-panel hoverable" ng-show="post.comments.length">
         <div class="row comment-row" ng-repeat="comment in post.comments">
           <div class="col offset-s1 offset-l1 s1 l1">
             <div class="valign-wrapper card-left">
               <div class="valign">
-                <i class="material-icons" ng-click="upvote(post)">thumb_up</i>
+                <i class="material-icons" ng-click="upvoteComment(comment)">thumb_up</i>
                 <p style="padding-left: 7px;">{{ comment.upvotes }}</p>
-                <i class="material-icons" ng-click="downvote(post)">thumb_down</i>
+                <i class="material-icons" ng-click="downvoteComment(comment)">thumb_down</i>
               </div>
             </div>
           </div>
