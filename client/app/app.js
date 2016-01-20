@@ -30,7 +30,7 @@ angular.module('myApp', [
       url: '/Hire',
       templateUrl: 'app/views/Hire.html',
       data: {
-        requiresLogin: true
+        requiresLogin: false
       }
     })
     .state('about', {
