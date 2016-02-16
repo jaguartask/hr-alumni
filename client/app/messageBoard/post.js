@@ -5,12 +5,12 @@ angular.module('myApp.post', [])
     $state.go('messageBoard');
   }
   messageBoardFactory
-  	.getPost($stateParams.id)
-  	.success(function(data) {
-  		$scope.post = data;
-  	})
-  	.error(function(err) {
-  	  $scope.error = 'Ooopsss...something went wrong. Please try again later.';
+    .getPost($stateParams.id)
+    .success(function(data) {
+      $scope.post = data;
+    })
+    .error(function(err) {
+      $scope.error = 'Ooopsss...something went wrong. Please try again later.';
   });
 
   Auth.getUser().then(function(user) {
@@ -22,49 +22,49 @@ angular.module('myApp.post', [])
   $scope.addComment = function() {
     if($scope.body === '') { return; }
     messageBoardFactory
-    	.addComment($stateParams.id, {body: $scope.body, author: $scope.user.contact.name, profile: $scope.user.contact.githubName})
-    	.success(function(data) {
-    		//console.log('data: ', data);
-    		$scope.post.comments.push(data);
-    	});
+      .addComment($stateParams.id, {body: $scope.body, author: $scope.user.contact.name, profile: $scope.user.contact.githubName})
+      .success(function(data) {
+        //console.log('data: ', data);
+        $scope.post.comments.push(data);
+      });
     $scope.body = '';
     $('#createComment').closeModal();
   };
 
   $scope.upvoteComment = function(comment) {
-  	messageBoardFactory
-  		.upvoteComment($scope.post, comment)
-  		.success(function(data) {
-  			comment.upvotes += 1;
-  		})
-  		.error(function(err) {
-  	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
-  		});
+    messageBoardFactory
+      .upvoteComment($scope.post, comment)
+      .success(function(data) {
+        comment.upvotes += 1;
+      })
+      .error(function(err) {
+        $scope.error = 'Ooopsss...something went wrong. Please try again later.';
+      });
   };
 
   $scope.downvoteComment = function(comment) {
-  	messageBoardFactory
-  		.downvoteComment($scope.post, comment)
-  		.success(function(data) {
-  			comment.upvotes -= 1;
-  		})
-  		.error(function(err) {
-  	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
-  		});
+    messageBoardFactory
+      .downvoteComment($scope.post, comment)
+      .success(function(data) {
+        comment.upvotes -= 1;
+      })
+      .error(function(err) {
+        $scope.error = 'Ooopsss...something went wrong. Please try again later.';
+      });
   };
 
   $scope.upvote = function(post) {
     messageBoardFactory.upvote(post)
       .error(function(err) {
-  	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
-  		});
+        $scope.error = 'Ooopsss...something went wrong. Please try again later.';
+      });
   };
 
   $scope.downvote = function(post) {
     messageBoardFactory.downvote(post)
       .error(function(err) {
-  	  	$scope.error = 'Ooopsss...something went wrong. Please try again later.';
-  		});
+        $scope.error = 'Ooopsss...something went wrong. Please try again later.';
+      });
   };
 
   $scope.showCreateComment = function() {
