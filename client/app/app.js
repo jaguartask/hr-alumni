@@ -40,10 +40,6 @@ angular.module('myApp', [
         requiresLogin: false
       }
     })
-    // .state('createProfile', {
-    //   url: '/createProfile',
-    //   templateUrl: 'app/views/createProfile.html'
-    // })
     .state('login', {
       url: '/login',
       templateUrl: 'app/views/login.html',
@@ -125,10 +121,8 @@ angular.module('myApp', [
 }])
 
 .controller('profileCtrl', ['$scope', 'HttpRequest', '$stateParams', function ($scope, HttpRequest,$stateParams) {
-  //console.log('controller gets called');
   HttpRequest.getProfile($stateParams.githubName)
     .success(function(data) {
-      //console.log('Profile = ', data);
       $scope.currentProfile = data[0];
     });
 }])
@@ -156,23 +150,9 @@ angular.module('myApp', [
 
 }])
 
-// .controller('createProfileCtrl', ['$scope', 'HttpRequest', function ($scope, HttpRequest){
-//   $scope.submitProfile = function (isValid, formData) {
-//     console.log(formData);
-//     console.log('First isValid: ', isValid);
-//     // HttpRequest.submitProfile(isValid, formData);
-//   }
-// }])
-
 .controller('updateProfileCtrl', ['$scope', '$stateParams','HttpRequest', '$rootScope', function ($scope, $stateParams, HttpRequest, $rootScope){
   console.log('$stateParams are: ', $stateParams);
   $rootScope.isLoggeIn = function(){return true;};
-  // redirects to /updateProfile/:githubName
-  // $scope.submitProfile = function (isValid, formData) {
-  //       console.log('formData', formData);
-  //       console.log('First isValid: ', isValid);
-  //       // HttpRequest.submitProfile(isValid, formData);
-  // }
 
   $scope.submitProfile = function (isValid, formData) {
 
@@ -187,13 +167,6 @@ angular.module('myApp', [
       $scope.data= res.data;
       console.log('profile data: ', res.data[0]);
       console.log('contact data: ', res.data[0].contact);
-      // $scope.setProfile= function (profile) {
-      //   console.log('set profile called');
-      //   $scope.currentProfile= Profile.setProfile(profile);
-      //   console.log('currentProfile', $scope.currentProfile);
-      // }
-
-
     })
 
 }])
@@ -244,12 +217,8 @@ angular.module('myApp', [
       method: 'GET',
       url: '/api/profile/'+githubName
     }).success(function(result){
-      // console.log('Get profile res: ', result);
-      // deferred.resolve(result);
       return result;
     }).error(function (err){
-      // console.log('Get profile err: ', result);
-      // deferred.reject(result);
       return err;
     })
   }
