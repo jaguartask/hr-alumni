@@ -1,4 +1,4 @@
-# hr-alumni
+# HR Alumni
 HR Alumni is an app that allows Hack Reactor alumni to track jobs, message each other, and post their profiles for employers to browse.
 
 ## Team
